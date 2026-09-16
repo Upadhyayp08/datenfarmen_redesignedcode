@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
@@ -118,6 +118,14 @@ const commonFooter = {
   email: "info@datenfarmen.com",
 };
 
+// Render icon components defensively. This prevents a bad/dynamic icon reference
+// from crashing the entire React tree in a production build.
+function SafeIcon({ icon: Icon, ...props }) {
+  const type = typeof Icon;
+  if (!Icon || (type !== "function" && type !== "object")) return null;
+  return React.createElement(Icon, props);
+}
+
 function App() {
   return (
     <BrowserRouter>
@@ -128,7 +136,9 @@ function App() {
 }
 function ScrollTop() {
   const { pathname } = useLocation();
-  useEffect(() => window.scrollTo(0, 0), [pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
   return null;
 }
 function SiteShell() {
@@ -228,11 +238,10 @@ function Header({ mobile, setMobile }) {
               {label === "Solutions" && (
                 <div className={"mega-menu " + (solutionsOpen ? "open" : "")} aria-hidden={!solutionsOpen}>
                   {SOLUTIONS.map((s) => {
-                    const I = s.icon;
                     return (
                       <Link key={s.path} to={s.path} className="mega-item">
                         <span className="icon-chip">
-                          <I size={16} />
+                          <SafeIcon icon={s.icon} size={16} />
                         </span>
                         <span>
                           <strong>{s.name}</strong>
@@ -396,11 +405,11 @@ function Section({ eyebrow, title, children, muted = false, className = "" }) {
   );
 }
 
-function IconCard({ icon: Icon, title, text }) {
+function IconCard({ icon, title, text }) {
   return (
     <div className="card icon-card">
       <span className="icon-chip large">
-        <Icon size={20} />
+        <SafeIcon icon={icon} size={20} />
       </span>
       <h3>{title}</h3>
       <p>{text}</p>
@@ -466,8 +475,9 @@ function Home({ onChat }) {
           </div>
           <div className="hero-media">
             <img
-              src="/hero-future-proof.png"
+              src="/hero-future-proof.webp"
               alt="Future-proof data infrastructure connecting cloud, industry, healthcare, logistics, education and business"
+              decoding="async"
             />
             <div className="media-note">
               <Sparkles size={15} />
@@ -496,7 +506,8 @@ function Home({ onChat }) {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
                 />
                 <figcaption>{image.credit}</figcaption>
@@ -539,7 +550,7 @@ function Home({ onChat }) {
             ["Ultra-Low Latency Connectivity", "Strategically positioned infrastructure and strong network connectivity help applications communicate quickly with users, systems and businesses.", Network],
           ].map(([title, text, Icon]) => (
             <div className="difference-card" key={title}>
-              <span className="difference-icon"><Icon size={23} /></span>
+              <span className="difference-icon"><SafeIcon icon={Icon} size={23} /></span>
               <div>
                 <h3>{title}</h3>
                 <p>{text}</p>
@@ -562,7 +573,7 @@ function Home({ onChat }) {
           {SOLUTIONS.map((s) => (
             <Link to={s.path} key={s.path} className="solution-card">
               <span className="icon-chip large">
-                <s.icon size={21} />
+                <SafeIcon icon={s.icon} size={21} />
               </span>
               <h3>{s.name}</h3>
               <p>{s.desc}</p>
@@ -1003,7 +1014,7 @@ function Solutions() {
           {SOLUTIONS.map((s) => (
             <Link to={s.path} key={s.path} className="solution-card">
               <span className="icon-chip large">
-                <s.icon size={21} />
+                <SafeIcon icon={s.icon} size={21} />
               </span>
               <h3>{s.name}</h3>
               <p>{s.desc}</p>
@@ -1026,7 +1037,7 @@ function Locations() {
       name: "Ankleshwar, Gujarat",
       status: "Phase 1",
       statusClass: "phase",
-      image: "/ankleshwar-plant.jpg",
+      image: "/ankleshwar-plant.webp",
       imageAlt: "Ankleshwar data center facility layout from the company presentation",
       intro:
         "Ankleshwar GIDC is a central industrial and commercial hub for chemical, pharmaceutical, and manufacturing industries. Its strategic position supports regional digital demand and direct engagement with customers across South Gujarat.",
@@ -1061,7 +1072,7 @@ function Locations() {
       name: "Indore, Madhya Pradesh",
       status: "Live",
       statusClass: "live",
-      image: "/indore-facility.png",
+      image: "/indore-facility.webp",
       imageAlt: "Indore data center facility concept from the company presentation",
       intro:
         "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
@@ -1116,7 +1127,7 @@ function Locations() {
             {locations.map((location) => (
               <article className="location-modern-card" key={location.code}>
                 <div className="location-modern-media">
-                  <img src={location.image} alt={location.imageAlt} loading="lazy" />
+                  <img src={location.image} alt={location.imageAlt} loading="lazy" decoding="async" />
                   <div className="location-photo-overlay">
                     <span>{location.phase}</span>
                     <strong>{location.code}</strong>
@@ -2051,9 +2062,7 @@ function Pricing() {
       </section>
       <div className="pricing-tabs-shell">
         <div className="pricing-tabs-modern" role="tablist">
-          {PRICING_TABS.map((item, i) => {
-            const Icon = item.icon;
-            return (
+          {PRICING_TABS.map((item, i) => (
               <button
                 key={item.id}
                 className={i === tab ? "active" : ""}
@@ -2061,11 +2070,10 @@ function Pricing() {
                 role="tab"
                 aria-selected={i === tab}
               >
-                <Icon size={15} />
+                <SafeIcon icon={item.icon} size={15} />
                 <span>{item.label}</span>
               </button>
-            );
-          })}
+          ))}
         </div>
       </div>
       <main className="pricing-main">{renderTab()}</main>

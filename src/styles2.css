@@ -5049,3 +5049,54 @@ body {
     border-radius: 18px;
   }
 }
+
+/* =========================================================
+   PERFORMANCE / CHROME STABILITY
+   ========================================================= */
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Avoid expensive blur compositing in Chromium while keeping the glass look. */
+.site-header {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Let Chromium skip layout/paint work for sections below the fold. */
+.data-center-showcase,
+.customers-section,
+.difference-section,
+.products-section,
+.why-section,
+.location-stack,
+.locations-bottom-banner,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
+}
+
+.showcase-image img,
+.hero-media img,
+.location-modern-media img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
