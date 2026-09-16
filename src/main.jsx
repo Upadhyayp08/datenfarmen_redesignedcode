@@ -98,18 +98,24 @@ const SOLUTIONS = [
     desc: "Ultra-low latency infrastructure supporting AI, IoT, and critical applications.",
   },
 ];
+const DATA_CENTER_IMAGES = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Datacenter_Server_Racks_(22370909788).jpg",
+    alt: "Rows of server racks inside a modern data center",
+    credit: "Server racks · Wikimedia Commons · CC BY 2.0",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/CSIRO_ScienceImage_2042_A_row_of_computer_servers_in_a_server_rack.jpg",
+    alt: "Computer servers installed in data center racks",
+    credit: "Server infrastructure · CSIRO / Wikimedia Commons · CC BY 3.0",
+  },
+];
+
 const commonFooter = {
   tagline:
     "Building the foundation for India's digital future with reliable, scalable, and sustainable data ecosystems.",
   address: "Ankleshwar, Gujarat, India",
   email: "info@datenfarmen.com",
-};
-
-const FACILITY_IMAGES = {
-  hero: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=88",
-  racks: "https://images.unsplash.com/photo-1580584126903-c17d41830450?auto=format&fit=crop&w=1400&q=88",
-  infrastructure: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=82",
-  operations: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=82",
 };
 
 function App() {
@@ -154,13 +160,10 @@ function SiteShell() {
 
 function Header({ mobile, setMobile }) {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const solutionsRef = useRef(null);
   const loc = useLocation();
+  const solutionsRef = useRef(null);
 
-  useEffect(() => {
-    setMobile(false);
-    setSolutionsOpen(false);
-  }, [loc.pathname, setMobile]);
+  useEffect(() => setMobile(false), [loc.pathname]);
 
   useEffect(() => {
     const handlePointerDown = (event) => {
@@ -171,7 +174,6 @@ function Header({ mobile, setMobile }) {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") setSolutionsOpen(false);
     };
-
     document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -180,69 +182,61 @@ function Header({ mobile, setMobile }) {
     };
   }, []);
 
-  const closeSolutions = () => setSolutionsOpen(false);
-
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link to="/" className="brand" aria-label="Datenfarmen home">
-          <span className="brand-logo-wrap">
-            <img className="brand-logo" src="/images/datenfarmen-logo.png" alt="Datenfarmen Centers LLP logo" />
-          </span>
+        <Link to="/" className="brand" aria-label="Datenfarmen Centers home">
+          <img className="brand-logo" src="/logo-mark.png" alt="Datenfarmen Centers LLP logo" />
           <span className="brand-text">
             <strong>DATENFARMEN</strong>
-            <em>Centers LLP</em>
+            <em>CENTERS LLP</em>
           </span>
         </Link>
-
         <nav className="desktop-nav" aria-label="Primary navigation">
           {NAV.map(([label, path]) => (
             <div
               key={path}
-              ref={label === "Solutions" ? solutionsRef : undefined}
               className={label === "Solutions" ? "nav-parent" : ""}
+              ref={label === "Solutions" ? solutionsRef : undefined}
+              onMouseEnter={label === "Solutions" ? () => setSolutionsOpen(true) : undefined}
+              onMouseLeave={label === "Solutions" ? () => setSolutionsOpen(false) : undefined}
             >
               {label === "Solutions" ? (
                 <button
                   className={
                     "nav-link " +
                     (loc.pathname.startsWith("/solutions") ||
-                    SOLUTIONS.some((item) => loc.pathname === item.path)
+                    SOLUTIONS.some((s) => loc.pathname === s.path)
                       ? "active"
                       : "")
                   }
                   onClick={() => setSolutionsOpen((v) => !v)}
                   aria-expanded={solutionsOpen}
-                  aria-haspopup="true"
                 >
                   Solutions <ChevronDown size={15} />
                 </button>
               ) : (
                 <NavLink
                   to={path}
-                  className={({ isActive }) => "nav-link " + (isActive ? "active" : "")}
-                  onClick={closeSolutions}
+                  className={({ isActive }) =>
+                    "nav-link " + (isActive ? "active" : "")
+                  }
                 >
                   {label}
                 </NavLink>
               )}
-
-              {label === "Solutions" && solutionsOpen && (
-                <div className="mega-menu" role="menu">
-                  {SOLUTIONS.map((solution) => {
-                    const I = solution.icon;
+              {label === "Solutions" && (
+                <div className={"mega-menu " + (solutionsOpen ? "open" : "")} aria-hidden={!solutionsOpen}>
+                  {SOLUTIONS.map((s) => {
+                    const I = s.icon;
                     return (
-                      <Link
-                        key={solution.path}
-                        to={solution.path}
-                        className="mega-item"
-                        role="menuitem"
-                        onClick={closeSolutions}
-                      >
-                        <span className="icon-chip"><I size={16} /></span>
+                      <Link key={s.path} to={s.path} className="mega-item">
+                        <span className="icon-chip">
+                          <I size={16} />
+                        </span>
                         <span>
-                          <strong>{solution.name}</strong>
-                          <small>{solution.desc}</small>
+                          <strong>{s.name}</strong>
+                          <small>{s.desc}</small>
                         </span>
                       </Link>
                     );
@@ -252,28 +246,32 @@ function Header({ mobile, setMobile }) {
             </div>
           ))}
         </nav>
-
         <div className="header-actions">
-          <Link className="button small secondary" to="/contact">Get a Consultation</Link>
+          <Link className="button small secondary" to="/contact">
+            Get a Consultation
+          </Link>
           <button
             className="icon-button mobile-toggle"
-            aria-label={mobile ? "Close navigation" : "Open navigation"}
+            aria-label="Open navigation"
             onClick={() => setMobile((v) => !v)}
           >
             {mobile ? <X /> : <Menu />}
           </button>
         </div>
       </div>
-
       {mobile && (
         <div className="mobile-menu">
           <div className="container mobile-menu-inner">
             {NAV.filter(([l]) => l !== "Solutions").map(([label, path]) => (
-              <NavLink key={path} to={path} className="mobile-link">{label}</NavLink>
+              <NavLink key={path} to={path} className="mobile-link">
+                {label}
+              </NavLink>
             ))}
             <div className="mobile-solutions-title">Solutions</div>
-            {SOLUTIONS.map((solution) => (
-              <Link key={solution.path} to={solution.path} className="mobile-link nested">{solution.name}</Link>
+            {SOLUTIONS.map((s) => (
+              <Link key={s.path} to={s.path} className="mobile-link nested">
+                {s.name}
+              </Link>
             ))}
           </div>
         </div>
@@ -283,45 +281,49 @@ function Header({ mobile, setMobile }) {
 }
 
 function Footer() {
+  const quickLinks = [
+    ["Home", "/"],
+    ["About Us", "/about"],
+    ["Solutions", "/solutions"],
+    ["Locations", "/locations"],
+    ["Pricing", "/pricing"],
+    ["Contact", "/contact"],
+  ];
+
   return (
     <footer className="footer">
       <div className="container footer-grid">
-        <div>
+        <div className="footer-col footer-brand-col">
           <Link to="/" className="brand footer-brand">
-            <span className="brand-logo-wrap footer-logo-wrap">
-              <img className="brand-logo" src="/images/datenfarmen-logo.png" alt="Datenfarmen Centers LLP logo" />
-            </span>
+            <img className="brand-logo" src="/logo-mark.png" alt="Datenfarmen Centers LLP logo" />
             <span className="brand-text">
               <strong>DATENFARMEN</strong>
-              <em>Centers LLP</em>
+              <em>CENTERS LLP</em>
             </span>
           </Link>
           <p>{commonFooter.tagline}</p>
         </div>
-        <div className="footer-column footer-quick-links">
+        <div className="footer-col">
           <h4>Quick Links</h4>
-          {[
-            ["Home", "/"],
-            ["About Us", "/about"],
-            ["Solutions", "/solutions"],
-            ["Locations", "/locations"],
-            ["Pricing", "/pricing"],
-            ["Contact", "/contact"],
-          ].map((x) => (
-            <Link key={x[1]} to={x[1]}>
-              {x[0]}
-            </Link>
-          ))}
+          <div className="footer-link-list">
+            {quickLinks.map(([label, path]) => (
+              <Link key={path} to={path}>
+                {label}
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="footer-column">
+        <div className="footer-col">
           <h4>Our Solutions</h4>
-          {SOLUTIONS.map((s) => (
-            <Link key={s.path} to={s.path}>
-              {s.name}
-            </Link>
-          ))}
+          <div className="footer-link-list">
+            {SOLUTIONS.map((s) => (
+              <Link key={s.path} to={s.path}>
+                {s.name}
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="footer-column footer-contact">
+        <div className="footer-col">
           <h4>Contact Us</h4>
           <p>{commonFooter.address}</p>
           <a href="mailto:info@datenfarmen.com">{commonFooter.email}</a>
@@ -329,7 +331,7 @@ function Footer() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© 2025 Datenfarmen Centers LLP. All Rights Reserved.</span>
+        <span>© 2026 Datenfarmen Centers LLP. All Rights Reserved.</span>
         <span>
           <Link to="/privacy-policy">Privacy Policy</Link>
           <Link to="/terms-conditions">Terms & Conditions</Link>
@@ -464,8 +466,8 @@ function Home({ onChat }) {
           </div>
           <div className="hero-media">
             <img
-              src={FACILITY_IMAGES.hero}
-              alt="Modern data center server racks"
+              src="/hero-future-proof.png"
+              alt="Future-proof data infrastructure connecting cloud, industry, healthcare, logistics, education and business"
             />
             <div className="media-note">
               <Sparkles size={15} />
@@ -474,34 +476,82 @@ function Home({ onChat }) {
           </div>
         </div>
       </section>
-      <section className="facility-showcase" aria-label="Datenfarmen facilities">
+      <section className="data-center-showcase">
         <div className="container">
-          <div className="facility-showcase-head">
+          <div className="showcase-heading">
             <div>
-              <span className="eyebrow">Inside Datenfarmen</span>
-              <h2>Infrastructure built to look as strong as it performs.</h2>
+              <span className="eyebrow">Infrastructure in Focus</span>
+              <h2>Built around resilient, modern data center infrastructure.</h2>
             </div>
-            <p>High-density compute, resilient power and secure operations come together in a professional infrastructure environment designed for always-on workloads.</p>
+            <p>
+              A visual look at the server environments and high-density infrastructure that inspire our enterprise-first approach.
+            </p>
           </div>
-          <div className="facility-gallery">
-            <figure className="facility-gallery-main">
-              <img src={FACILITY_IMAGES.racks} alt="Data center server racks" loading="lazy" />
-              <figcaption>High-density server infrastructure</figcaption>
-            </figure>
-            <figure>
-              <img src={FACILITY_IMAGES.operations} alt="Technology operations workspace" loading="lazy" />
-              <figcaption>24/7 operational readiness</figcaption>
-            </figure>
-            <figure>
-              <img src={FACILITY_IMAGES.infrastructure} alt="Enterprise data center infrastructure" loading="lazy" />
-              <figcaption>Enterprise-grade infrastructure</figcaption>
-            </figure>
+          <div className="showcase-grid">
+            {DATA_CENTER_IMAGES.map((image, index) => (
+              <figure
+                className={index === 0 ? "showcase-image showcase-image-large" : "showcase-image"}
+                key={image.src}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  referrerPolicy="no-referrer"
+                />
+                <figcaption>{image.credit}</figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
       <Section
+        eyebrow="Built for These Customers"
+        title="Infrastructure Designed Around the Way You Operate"
+        className="customers-section"
+      >
+        <p className="section-lead">
+          From growing local businesses to digital-first enterprises, our infrastructure is designed to support the workloads that keep modern organisations moving.
+        </p>
+        <div className="customer-pill-grid">
+          {[
+            "MSMEs", "Web hosters", "ISPs", "Retail", "Restaurants", "Hotels",
+            "Clinics", "Schools", "Logistics", "Ecommerce", "Developers & SaaS",
+            "FinTech", "EdTech", "Local enterprises",
+          ].map((customer) => (
+            <span className="customer-pill" key={customer}>{customer}</span>
+          ))}
+        </div>
+      </Section>
+      <Section
+        eyebrow="Why Datenfarmen"
+        title="What Makes Us Different"
+        className="difference-section"
+      >
+        <p className="difference-tagline">Edge computing infrastructure with sustainability at its core.</p>
+        <div className="difference-grid">
+          {[
+            ["Optimised Use of Power & Space", "We make smarter use of available power capacity and physical space, turning underused resources into productive infrastructure.", Monitor],
+            ["Modular Infrastructure, Built for You", "Flexible, configurable infrastructure can be shaped around your workload today and expanded as your requirements grow.", Check],
+            ["Flexible & Predictable Cost Plans", "Straightforward pricing options give customers flexibility to choose the infrastructure and commercial model that fits their needs.", Zap],
+            ["Hybrid Renewable + Grid Power", "Combining renewable generation with dependable grid power creates a balanced, resilient and more sustainable energy model.", Sparkles],
+            ["Transparent Pricing — No Surprise Add-ons", "We keep the commercial model clear so customers can understand what they are paying for without unexpected infrastructure add-on costs.", CircleHelp],
+            ["Ultra-Low Latency Connectivity", "Strategically positioned infrastructure and strong network connectivity help applications communicate quickly with users, systems and businesses.", Network],
+          ].map(([title, text, Icon]) => (
+            <div className="difference-card" key={title}>
+              <span className="difference-icon"><Icon size={23} /></span>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+      <Section
         eyebrow="Full-Stack Platform"
         title="One Platform, Every Workload"
+        className="products-section"
       >
         <p className="section-lead">
           Beyond colocation, Datenfarmen runs a full cloud services platform —
@@ -533,6 +583,7 @@ function Home({ onChat }) {
         eyebrow="Why Datenfarmen"
         title="Built for Businesses That Can't Afford Downtime"
         muted
+        className="why-section"
       >
         <p className="section-lead">
           Designed to scale with India's next wave of digital growth, from a
@@ -575,6 +626,29 @@ function Home({ onChat }) {
           ))}
         </div>
       </Section>
+      <Section
+        eyebrow="Built to Global Standards"
+        title="Our facilities and operational processes are engineered around internationally recognised data center best practices."
+      >
+        <div className="standard-row">
+          {[
+            "2N Redundancy Design",
+            "Carrier-Neutral Facility",
+            "ISO-Aligned Processes",
+            "24/7 NOC Monitoring",
+            "Fire Safety Compliant",
+          ].map((x) => (
+            <div className="standard-pill" key={x}>
+              <Check size={15} />
+              {x}
+            </div>
+          ))}
+        </div>
+        <p className="note">
+          Formal certification logos (ISO, SOC 2, etc.) will be added here as
+          audits are completed.
+        </p>
+      </Section>
       <Section eyebrow="Client Feedback" title="Trusted by Growing Businesses">
         <p className="section-lead">
           What our clients say about building on Datenfarmen infrastructure.
@@ -616,29 +690,6 @@ function Home({ onChat }) {
         <p className="note">
           Representative feedback based on client engagements. Case studies
           available on request.
-        </p>
-      </Section>
-      <Section
-        eyebrow="Built to Global Standards"
-        title="Our facilities and operational processes are engineered around internationally recognised data center best practices."
-      >
-        <div className="standard-row">
-          {[
-            "2N Redundancy Design",
-            "Carrier-Neutral Facility",
-            "ISO-Aligned Processes",
-            "24/7 NOC Monitoring",
-            "Fire Safety Compliant",
-          ].map((x) => (
-            <div className="standard-pill" key={x}>
-              <Check size={15} />
-              {x}
-            </div>
-          ))}
-        </div>
-        <p className="note">
-          Formal certification logos (ISO, SOC 2, etc.) will be added here as
-          audits are completed.
         </p>
       </Section>
       <Section eyebrow="Leadership" title="Led By Industry Experience">
@@ -715,6 +766,9 @@ function About() {
         <div className="about-tab-content">
           {activeTab === "Company" && (
             <div role="tabpanel">
+              <p className="company-sustainability">
+                Combining solar energy with grid power in a hybrid system enhances long-term <strong>sustainability</strong> by seamlessly balancing renewable generation with reliable utility backup.
+              </p>
               <div className="feature-grid four">
                 {[
                   [
@@ -965,94 +1019,185 @@ function Solutions() {
 }
 
 function Locations() {
+  const locations = [
+    {
+      phase: "Phase 1",
+      code: "ANK-1",
+      name: "Ankleshwar, Gujarat",
+      status: "Phase 1",
+      statusClass: "phase",
+      image: "/ankleshwar-plant.jpg",
+      imageAlt: "Ankleshwar data center facility layout from the company presentation",
+      intro:
+        "Ankleshwar GIDC is a central industrial and commercial hub for chemical, pharmaceutical, and manufacturing industries. Its strategic position supports regional digital demand and direct engagement with customers across South Gujarat.",
+      site: [
+        "Single-storey building with administrative area",
+        "Building area: 7,196 sqft",
+        "On-site parking for 3 vehicles",
+        "Secure fencing options",
+        "Total technical area: 600–800 sqft per data hall",
+      ],
+      connectivity: [
+        "Airtel & Jio fibre connectivity",
+        "Direct peering with major telecom providers",
+        "Low-latency connections to Mumbai, Delhi, Bangalore",
+      ],
+      specs: [
+        ["IT Capacity", "150–300 KW scalable infrastructure"],
+        ["Rack Density", "2–2.5 KW per rack"],
+        ["Power", "230V single phase, 50Hz"],
+        ["Redundancy", "N+1 for critical systems"],
+        ["Cooling", "Advanced cooling and rack configuration"],
+      ],
+      highlights: [
+        ["Vibrant Ecosystem", "Central industrial and commercial hub for chemical, pharmaceutical and manufacturing industries."],
+        ["Seamless Interconnection", "Road and rail connectivity through NH-48 and Ankleshwar Junction supports key business corridors."],
+        ["Proximity to Customers", "Strategically positioned for rapid service delivery across South Gujarat."],
+      ],
+    },
+    {
+      phase: "Phase 2",
+      code: "IND-1",
+      name: "Indore, Madhya Pradesh",
+      status: "Live",
+      statusClass: "live",
+      image: "/indore-facility.png",
+      imageAlt: "Indore data center facility concept from the company presentation",
+      intro:
+        "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
+      site: [
+        "Single-storey building with administrative area",
+        "Building area: 3,196 sqft",
+        "On-site parking for 3 vehicles",
+        "Secure fencing options",
+        "Total technical area: 600–800 sqft per data hall",
+      ],
+      connectivity: [
+        "Airtel, Jio, BSNL, and RailTel fibre connectivity",
+        "Direct peering with major telecom providers",
+        "Low-latency connections to Mumbai and Delhi",
+      ],
+      specs: [
+        ["IT Capacity", "150–300 KW scalable infrastructure"],
+        ["Rack Density", "2–2.5 KW per rack"],
+        ["Power", "230V single phase, 50Hz"],
+        ["Redundancy", "2N for critical systems"],
+        ["Cooling", "Advanced cooling and rack configuration"],
+      ],
+      highlights: [
+        ["Vibrant Ecosystem", "A dynamic Central Indian business ecosystem spanning manufacturing, pharma, logistics, IT and digital enterprises."],
+        ["Seamless Interconnection", "National highways, rail infrastructure and airport access support efficient regional interconnection."],
+        ["Proximity to Customers", "Strategically positioned to support demand across Madhya Pradesh and adjoining markets."],
+      ],
+    },
+  ];
+
   return (
     <>
       <PageHero
-        eyebrow="Facilities"
-        title="Our Locations"
-        description="Strategically positioned facilities in India's fastest-growing industrial hubs."
+        eyebrow="Strategic Locations"
+        title="Infrastructure Where Your Business Needs It"
+        description="Purpose-positioned edge infrastructure in high-growth industrial and commercial hubs across India, designed around connectivity, capacity and customer proximity."
       />
-      <Section>
-        <div className="location-card">
-          <div>
-            <div className="status-row">
-              <h2>Indore (IND-1)</h2>
-              <span className="status live">Live</span>
+
+      <section className="locations-overview">
+        <div className="container">
+          <div className="locations-intro">
+            <div>
+              <span className="eyebrow">Our Network</span>
+              <h2>Two strategic hubs. One connected infrastructure vision.</h2>
             </div>
             <p>
-              Positioned as a major commercial and industrial hub in Central
-              India. IND-1 offers high-density computing capabilities with
-              excellent connectivity to major metros.
+              Explore the current and planned facilities supporting businesses across Western and Central India. Each location combines practical site design, scalable IT capacity and regional connectivity.
             </p>
-            <ul className="check-list">
-              <li>Devi Ahilya Bai Holkar Airport</li>
-              <li>Indore Junction Rail Access</li>
-              <li>Carrier Neutral (Airtel, Jio, BSNL)</li>
-            </ul>
-            <SpecTable
-              rows={[
-                ["IT Capacity", "150-300 KW"],
-                ["Rack Density", "2-2.5 KW per rack"],
-                ["Building Area", "3,196 sqft (Single Story)"],
-                ["Redundancy", "2N (Electrical & Mechanical)"],
-              ]}
-            />
           </div>
-          <div>
-            <img
-              className="wide-image"
-              src="https://datenfarmen.com/indore-map.png"
-              alt="Map of Indore Location"
-            />
-            <p className="note">Swipe/Scroll to view more images</p>
+
+          <div className="location-stack">
+            {locations.map((location) => (
+              <article className="location-modern-card" key={location.code}>
+                <div className="location-modern-media">
+                  <img src={location.image} alt={location.imageAlt} loading="lazy" />
+                  <div className="location-photo-overlay">
+                    <span>{location.phase}</span>
+                    <strong>{location.code}</strong>
+                  </div>
+                  <div className="location-photo-caption">
+                    <span>Strategic location</span>
+                    <strong>{location.name}</strong>
+                  </div>
+                </div>
+
+                <div className="location-modern-content">
+                  <div className="location-title-row">
+                    <div>
+                      <span className="location-kicker">{location.phase}</span>
+                      <h2>{location.name}</h2>
+                    </div>
+                    <span className={`status ${location.statusClass}`}>{location.status}</span>
+                  </div>
+
+                  <p className="location-modern-intro">{location.intro}</p>
+
+                  <div className="location-info-grid">
+                    <div className="location-info-panel">
+                      <div className="location-panel-icon"><Monitor size={18} /></div>
+                      <div>
+                        <h3>Site Overview</h3>
+                        <ul className="compact-list">
+                          {location.site.map((item) => <li key={item}>{item}</li>)}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="location-info-panel">
+                      <div className="location-panel-icon"><Network size={18} /></div>
+                      <div>
+                        <h3>ISP &amp; Connectivity</h3>
+                        <ul className="compact-list">
+                          {location.connectivity.map((item) => <li key={item}>{item}</li>)}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="location-spec-strip">
+                    {location.specs.map(([label, value]) => (
+                      <div key={label}>
+                        <span>{label}</span>
+                        <strong>{value}</strong>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="location-highlight-grid">
+                    {location.highlights.map(([title, text]) => (
+                      <div key={title}>
+                        <span>{title}</span>
+                        <p>{text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="locations-bottom-banner">
+            <div>
+              <span className="eyebrow">Strategic Expansion</span>
+              <h2>Building a stronger, more connected digital India.</h2>
+              <p>Our location strategy brings dependable infrastructure closer to growing businesses, regional customers and critical workloads.</p>
+            </div>
+            <Link className="button primary" to="/contact">
+              Discuss Your Location Needs <ArrowRight size={17} />
+            </Link>
           </div>
         </div>
-      </Section>
-      <Section muted>
-        <div className="location-card">
-          <div>
-            <div className="status-row">
-              <h2>Ankleshwar (ANK-1)</h2>
-              <span className="status phase">Phase 1</span>
-            </div>
-            <p>
-              Located in the heart of Asia's largest industrial centers (GIDC).
-              A hub for chemical, pharmaceutical, and manufacturing industries
-              requiring robust industrial IoT data solutions.
-            </p>
-            <ul className="check-list">
-              <li>Strategically in GIDC Area</li>
-              <li>NH-48 & Ankleshwar Junction</li>
-              <li>Low Latency to Surat & Mumbai</li>
-            </ul>
-            <div className="link-row">
-              <a
-                className="button ghost"
-                href="https://maps.app.goo.gl/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View Plot Location Map <ExternalLink size={15} />
-              </a>
-            </div>
-            <SpecTable
-              rows={[
-                ["IT Capacity", "150-300 KW"],
-                ["Rack Density", "2-2.5 KW per rack"],
-                ["Building Area", "3,196 sqft (Single Story)"],
-                ["Redundancy", "2N (Electrical & Mechanical)"],
-              ]}
-            />
-          </div>
-          <div className="image-stack">
-            <img className="location-facility-image" src={FACILITY_IMAGES.racks} alt="Datenfarmen data center infrastructure" loading="lazy" />
-            <p className="note">Facility imagery shown for infrastructure context.</p>
-          </div>
-        </div>
-      </Section>
+      </section>
     </>
   );
 }
+
 function SpecTable({ rows }) {
   return (
     <table className="spec-table">
