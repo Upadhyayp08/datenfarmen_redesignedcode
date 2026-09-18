@@ -177,7 +177,10 @@ function Header({ mobile, setMobile }) {
 
   useEffect(() => {
     const handlePointerDown = (event) => {
-      if (solutionsRef.current && !solutionsRef.current.contains(event.target)) {
+      if (
+        solutionsRef.current &&
+        !solutionsRef.current.contains(event.target)
+      ) {
         setSolutionsOpen(false);
       }
     };
@@ -196,7 +199,11 @@ function Header({ mobile, setMobile }) {
     <header className="site-header">
       <div className="container header-inner">
         <Link to="/" className="brand" aria-label="Datenfarmen Centers home">
-          <img className="brand-logo" src="/logo-mark.png" alt="Datenfarmen Centers LLP logo" />
+          <img
+            className="brand-logo"
+            src="/logo-mark.png"
+            alt="Datenfarmen Centers LLP logo"
+          />
           <span className="brand-text">
             <strong>DATENFARMEN</strong>
             <em>CENTERS LLP</em>
@@ -208,8 +215,14 @@ function Header({ mobile, setMobile }) {
               key={path}
               className={label === "Solutions" ? "nav-parent" : ""}
               ref={label === "Solutions" ? solutionsRef : undefined}
-              onMouseEnter={label === "Solutions" ? () => setSolutionsOpen(true) : undefined}
-              onMouseLeave={label === "Solutions" ? () => setSolutionsOpen(false) : undefined}
+              onMouseEnter={
+                label === "Solutions" ? () => setSolutionsOpen(true) : undefined
+              }
+              onMouseLeave={
+                label === "Solutions"
+                  ? () => setSolutionsOpen(false)
+                  : undefined
+              }
             >
               {label === "Solutions" ? (
                 <button
@@ -236,7 +249,10 @@ function Header({ mobile, setMobile }) {
                 </NavLink>
               )}
               {label === "Solutions" && (
-                <div className={"mega-menu " + (solutionsOpen ? "open" : "")} aria-hidden={!solutionsOpen}>
+                <div
+                  className={"mega-menu " + (solutionsOpen ? "open" : "")}
+                  aria-hidden={!solutionsOpen}
+                >
                   {SOLUTIONS.map((s) => {
                     return (
                       <Link key={s.path} to={s.path} className="mega-item">
@@ -304,7 +320,11 @@ function Footer() {
       <div className="container footer-grid">
         <div className="footer-col footer-brand-col">
           <Link to="/" className="brand footer-brand">
-            <img className="brand-logo" src="/logo-mark.png" alt="Datenfarmen Centers LLP logo" />
+            <img
+              className="brand-logo"
+              src="/logo-mark.png"
+              alt="Datenfarmen Centers LLP logo"
+            />
             <span className="brand-text">
               <strong>DATENFARMEN</strong>
               <em>CENTERS LLP</em>
@@ -491,16 +511,23 @@ function Home({ onChat }) {
           <div className="showcase-heading">
             <div>
               <span className="eyebrow">Infrastructure in Focus</span>
-              <h2>Built around resilient, modern data center infrastructure.</h2>
+              <h2>
+                Built around resilient, modern data center infrastructure.
+              </h2>
             </div>
             <p>
-              A visual look at the server environments and high-density infrastructure that inspire our enterprise-first approach.
+              A visual look at the server environments and high-density
+              infrastructure that inspire our enterprise-first approach.
             </p>
           </div>
           <div className="showcase-grid">
             {DATA_CENTER_IMAGES.map((image, index) => (
               <figure
-                className={index === 0 ? "showcase-image showcase-image-large" : "showcase-image"}
+                className={
+                  index === 0
+                    ? "showcase-image showcase-image-large"
+                    : "showcase-image"
+                }
                 key={image.src}
               >
                 <img
@@ -522,15 +549,30 @@ function Home({ onChat }) {
         className="customers-section"
       >
         <p className="section-lead">
-          From growing local businesses to digital-first enterprises, our infrastructure is designed to support the workloads that keep modern organisations moving.
+          From growing local businesses to digital-first enterprises, our
+          infrastructure is designed to support the workloads that keep modern
+          organisations moving.
         </p>
         <div className="customer-pill-grid">
           {[
-            "MSMEs", "Web hosters", "ISPs", "Retail", "Restaurants", "Hotels",
-            "Clinics", "Schools", "Logistics", "Ecommerce", "Developers & SaaS",
-            "FinTech", "EdTech", "Local enterprises",
+            "MSMEs",
+            "Web hosters",
+            "ISPs",
+            "Retail",
+            "Restaurants",
+            "Hotels",
+            "Clinics",
+            "Schools",
+            "Logistics",
+            "Ecommerce",
+            "Developers & SaaS",
+            "FinTech",
+            "EdTech",
+            "Local enterprises",
           ].map((customer) => (
-            <span className="customer-pill" key={customer}>{customer}</span>
+            <span className="customer-pill" key={customer}>
+              {customer}
+            </span>
           ))}
         </div>
       </Section>
@@ -539,18 +581,46 @@ function Home({ onChat }) {
         title="What Makes Us Different"
         className="difference-section"
       >
-        <p className="difference-tagline">Edge computing infrastructure with sustainability at its core.</p>
+        <p className="difference-tagline">
+          Edge computing infrastructure with sustainability at its core.
+        </p>
         <div className="difference-grid">
           {[
-            ["Optimised Use of Power & Space", "We make smarter use of available power capacity and physical space, turning underused resources into productive infrastructure.", Monitor],
-            ["Modular Infrastructure, Built for You", "Flexible, configurable infrastructure can be shaped around your workload today and expanded as your requirements grow.", Check],
-            ["Flexible & Predictable Cost Plans", "Straightforward pricing options give customers flexibility to choose the infrastructure and commercial model that fits their needs.", Zap],
-            ["Hybrid Renewable + Grid Power", "Combining renewable generation with dependable grid power creates a balanced, resilient and more sustainable energy model.", Sparkles],
-            ["Transparent Pricing — No Surprise Add-ons", "We keep the commercial model clear so customers can understand what they are paying for without unexpected infrastructure add-on costs.", CircleHelp],
-            ["Ultra-Low Latency Connectivity", "Strategically positioned infrastructure and strong network connectivity help applications communicate quickly with users, systems and businesses.", Network],
+            [
+              "Optimised Use of Power & Space",
+              "We make smarter use of available power capacity and physical space, turning underused resources into productive infrastructure.",
+              Monitor,
+            ],
+            [
+              "Modular Infrastructure, Built for You",
+              "Flexible, configurable infrastructure can be shaped around your workload today and expanded as your requirements grow.",
+              Check,
+            ],
+            [
+              "Flexible & Predictable Cost Plans",
+              "Straightforward pricing options give customers flexibility to choose the infrastructure and commercial model that fits their needs.",
+              Zap,
+            ],
+            [
+              "Hybrid Renewable + Grid Power",
+              "Combining renewable generation with dependable grid power creates a balanced, resilient and more sustainable energy model.",
+              Sparkles,
+            ],
+            [
+              "Transparent Pricing — No Surprise Add-ons",
+              "We keep the commercial model clear so customers can understand what they are paying for without unexpected infrastructure add-on costs.",
+              CircleHelp,
+            ],
+            [
+              "Ultra-Low Latency Connectivity",
+              "Strategically positioned infrastructure and strong network connectivity help applications communicate quickly with users, systems and businesses.",
+              Network,
+            ],
           ].map(([title, text, Icon]) => (
             <div className="difference-card" key={title}>
-              <span className="difference-icon"><SafeIcon icon={Icon} size={23} /></span>
+              <span className="difference-icon">
+                <SafeIcon icon={Icon} size={23} />
+              </span>
               <div>
                 <h3>{title}</h3>
                 <p>{text}</p>
@@ -778,7 +848,9 @@ function About() {
           {activeTab === "Company" && (
             <div role="tabpanel">
               <p className="company-sustainability">
-                Combining solar energy with grid power in a hybrid system enhances long-term <strong>sustainability</strong> by seamlessly balancing renewable generation with reliable utility backup.
+                Combining solar energy with grid power in a hybrid system
+                enhances long-term <strong>sustainability</strong> by seamlessly
+                balancing renewable generation with reliable utility backup.
               </p>
               <div className="feature-grid four">
                 {[
@@ -1038,7 +1110,8 @@ function Locations() {
       status: "Phase 1",
       statusClass: "phase",
       image: "/ankleshwar-plant.webp",
-      imageAlt: "Ankleshwar data center facility layout from the company presentation",
+      imageAlt:
+        "Ankleshwar data center facility layout from the company presentation",
       intro:
         "Ankleshwar GIDC is a central industrial and commercial hub for chemical, pharmaceutical, and manufacturing industries. Its strategic position supports regional digital demand and direct engagement with customers across South Gujarat.",
       site: [
@@ -1061,9 +1134,18 @@ function Locations() {
         ["Cooling", "Advanced cooling and rack configuration"],
       ],
       highlights: [
-        ["Vibrant Ecosystem", "Central industrial and commercial hub for chemical, pharmaceutical and manufacturing industries."],
-        ["Seamless Interconnection", "Road and rail connectivity through NH-48 and Ankleshwar Junction supports key business corridors."],
-        ["Proximity to Customers", "Strategically positioned for rapid service delivery across South Gujarat."],
+        [
+          "Vibrant Ecosystem",
+          "Central industrial and commercial hub for chemical, pharmaceutical and manufacturing industries.",
+        ],
+        [
+          "Seamless Interconnection",
+          "Road and rail connectivity through NH-48 and Ankleshwar Junction supports key business corridors.",
+        ],
+        [
+          "Proximity to Customers",
+          "Strategically positioned for rapid service delivery across South Gujarat.",
+        ],
       ],
     },
     {
@@ -1073,7 +1155,8 @@ function Locations() {
       status: "Live",
       statusClass: "live",
       image: "/indore-facility.webp",
-      imageAlt: "Indore data center facility concept from the company presentation",
+      imageAlt:
+        "Indore data center facility concept from the company presentation",
       intro:
         "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
       site: [
@@ -1096,9 +1179,18 @@ function Locations() {
         ["Cooling", "Advanced cooling and rack configuration"],
       ],
       highlights: [
-        ["Vibrant Ecosystem", "A dynamic Central Indian business ecosystem spanning manufacturing, pharma, logistics, IT and digital enterprises."],
-        ["Seamless Interconnection", "National highways, rail infrastructure and airport access support efficient regional interconnection."],
-        ["Proximity to Customers", "Strategically positioned to support demand across Madhya Pradesh and adjoining markets."],
+        [
+          "Vibrant Ecosystem",
+          "A dynamic Central Indian business ecosystem spanning manufacturing, pharma, logistics, IT and digital enterprises.",
+        ],
+        [
+          "Seamless Interconnection",
+          "National highways, rail infrastructure and airport access support efficient regional interconnection.",
+        ],
+        [
+          "Proximity to Customers",
+          "Strategically positioned to support demand across Madhya Pradesh and adjoining markets.",
+        ],
       ],
     },
   ];
@@ -1119,7 +1211,9 @@ function Locations() {
               <h2>Two strategic hubs. One connected infrastructure vision.</h2>
             </div>
             <p>
-              Explore the current and planned facilities supporting businesses across Western and Central India. Each location combines practical site design, scalable IT capacity and regional connectivity.
+              Explore the current and planned facilities supporting businesses
+              across Western and Central India. Each location combines practical
+              site design, scalable IT capacity and regional connectivity.
             </p>
           </div>
 
@@ -1127,7 +1221,12 @@ function Locations() {
             {locations.map((location) => (
               <article className="location-modern-card" key={location.code}>
                 <div className="location-modern-media">
-                  <img src={location.image} alt={location.imageAlt} loading="lazy" decoding="async" />
+                  <img
+                    src={location.image}
+                    alt={location.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div className="location-photo-overlay">
                     <span>{location.phase}</span>
                     <strong>{location.code}</strong>
@@ -1144,28 +1243,38 @@ function Locations() {
                       <span className="location-kicker">{location.phase}</span>
                       <h2>{location.name}</h2>
                     </div>
-                    <span className={`status ${location.statusClass}`}>{location.status}</span>
+                    <span className={`status ${location.statusClass}`}>
+                      {location.status}
+                    </span>
                   </div>
 
                   <p className="location-modern-intro">{location.intro}</p>
 
                   <div className="location-info-grid">
                     <div className="location-info-panel">
-                      <div className="location-panel-icon"><Monitor size={18} /></div>
+                      <div className="location-panel-icon">
+                        <Monitor size={18} />
+                      </div>
                       <div>
                         <h3>Site Overview</h3>
                         <ul className="compact-list">
-                          {location.site.map((item) => <li key={item}>{item}</li>)}
+                          {location.site.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
                         </ul>
                       </div>
                     </div>
 
                     <div className="location-info-panel">
-                      <div className="location-panel-icon"><Network size={18} /></div>
+                      <div className="location-panel-icon">
+                        <Network size={18} />
+                      </div>
                       <div>
                         <h3>ISP &amp; Connectivity</h3>
                         <ul className="compact-list">
-                          {location.connectivity.map((item) => <li key={item}>{item}</li>)}
+                          {location.connectivity.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -1197,7 +1306,10 @@ function Locations() {
             <div>
               <span className="eyebrow">Strategic Expansion</span>
               <h2>Building a stronger, more connected digital India.</h2>
-              <p>Our location strategy brings dependable infrastructure closer to growing businesses, regional customers and critical workloads.</p>
+              <p>
+                Our location strategy brings dependable infrastructure closer to
+                growing businesses, regional customers and critical workloads.
+              </p>
             </div>
             <Link className="button primary" to="/contact">
               Discuss Your Location Needs <ArrowRight size={17} />
@@ -2063,16 +2175,16 @@ function Pricing() {
       <div className="pricing-tabs-shell">
         <div className="pricing-tabs-modern" role="tablist">
           {PRICING_TABS.map((item, i) => (
-              <button
-                key={item.id}
-                className={i === tab ? "active" : ""}
-                onClick={() => setTab(i)}
-                role="tab"
-                aria-selected={i === tab}
-              >
-                <SafeIcon icon={item.icon} size={15} />
-                <span>{item.label}</span>
-              </button>
+            <button
+              key={item.id}
+              className={i === tab ? "active" : ""}
+              onClick={() => setTab(i)}
+              role="tab"
+              aria-selected={i === tab}
+            >
+              <SafeIcon icon={item.icon} size={15} />
+              <span>{item.label}</span>
+            </button>
           ))}
         </div>
       </div>
@@ -2263,49 +2375,308 @@ function ServicePage() {
     </>
   );
 }
+const SIMPLE_EXPLANATIONS = {
+  "Single-Tenant Cloud":
+    "Think of it like having your own private floor in a building. The infrastructure is reserved for your business.",
+  "Multi-Tenant Cloud":
+    "Think of an apartment building: the building is shared, but your apartment is separated from everyone else.",
+  "Bare Metal Servers":
+    "Think of buying an entire machine instead of sharing one. The physical server is dedicated to your business.",
+  "Linux VPS":
+    "Think of getting your own room inside a powerful server. It runs Linux and can be managed like your own server.",
+  "Windows VPS":
+    "Think of getting your own Windows computer hosted in a data center, available remotely when you need it.",
+  "Managed VPS":
+    "You use the server for your business while our team takes care of important server maintenance behind the scenes.",
+  "Single Processor Dedicated Server":
+    "One complete physical server with one main processor is reserved entirely for your business.",
+  "Dual Processor Dedicated Server":
+    "One complete physical server has two processors, giving demanding applications more processing capacity.",
+  "Managed Dedicated Server":
+    "You get the whole physical server while our team helps maintain and monitor the infrastructure.",
+  "Business Email (cPanel / Zimbra)":
+    "Your team gets professional email using your own business domain, such as name@yourcompany.com.",
+  "Hosted Exchange & Office 365":
+    "Your business email and collaboration tools are hosted for you, so you do not have to run the underlying servers.",
+  "Cloud Firewall & DDoS Protection":
+    "Think of a security gate at the entrance: unwanted internet traffic is filtered before it reaches your systems.",
+  "VPN & Private Connectivity":
+    "Think of it as a private road connecting your offices, users, or systems securely.",
+  "Managed OS & Patch Management":
+    "We help keep the operating system updated with important maintenance and security fixes.",
+  "Managed Database Services":
+    "Your applications use a database to store information while our team manages the database platform.",
+  "Managed Network & Security Operations":
+    "Our team watches the network and security layer so problems can be detected and handled early.",
+  "Backup & Recovery":
+    "Important information is copied to a separate place so it can be restored after deletion, damage, or failure.",
+  "Disaster Recovery (DR)":
+    "A second recovery setup gives your business a way to bring important systems back after a major outage.",
+  "Object Storage & Ransomware Protection":
+    "Think of a large, protected digital warehouse where files can be stored and recovered when needed.",
+  "Carrier Connectivity":
+    "Your data center connects directly to telecom and internet carriers that provide network services.",
+  "Cross-Connects":
+    "A direct connection joins two networks or systems inside the data center without unnecessary network hops.",
+  "Cloud On-Ramp":
+    "Think of it as a private road from your infrastructure to a cloud provider instead of relying only on the public internet.",
+  "Micro Edge Nodes":
+    "Small computing locations are placed closer to users so applications do not have to travel as far.",
+  "Low-Latency Compute for AI & IoT":
+    "Computing is placed close to devices and users so AI and real-time applications can respond faster.",
+  "5G & Multi-Access Edge Computing (MEC)":
+    "Computing is placed close to 5G devices so real-time services can respond with less delay.",
+};
+
+const SIMPLE_VISUALS = {
+  "Single-Tenant Cloud": {
+    icon: Server,
+    a: "Your business",
+    b: "Private infrastructure",
+    tag: "Dedicated",
+  },
+  "Multi-Tenant Cloud": {
+    icon: Cloud,
+    a: "Shared platform",
+    b: "Your isolated space",
+    tag: "Shared + separated",
+  },
+  "Bare Metal Servers": {
+    icon: Server,
+    a: "Physical server",
+    b: "Your workloads",
+    tag: "100% dedicated",
+  },
+  "Linux VPS": {
+    icon: Monitor,
+    a: "Data-center server",
+    b: "Your Linux VPS",
+    tag: "Virtual server",
+  },
+  "Windows VPS": {
+    icon: Monitor,
+    a: "Data-center server",
+    b: "Your Windows VPS",
+    tag: "Virtual server",
+  },
+  "Managed VPS": {
+    icon: Server,
+    a: "Your application",
+    b: "Managed VPS",
+    tag: "We maintain it",
+  },
+  "Single Processor Dedicated Server": {
+    icon: Server,
+    a: "1 CPU server",
+    b: "Your workloads",
+    tag: "Dedicated",
+  },
+  "Dual Processor Dedicated Server": {
+    icon: Server,
+    a: "2 CPU server",
+    b: "Heavy workloads",
+    tag: "More processing",
+  },
+  "Managed Dedicated Server": {
+    icon: Server,
+    a: "Dedicated server",
+    b: "Our support",
+    tag: "Managed",
+  },
+  "Business Email (cPanel / Zimbra)": {
+    icon: Send,
+    a: "Your domain",
+    b: "Business inbox",
+    tag: "Professional email",
+  },
+  "Hosted Exchange & Office 365": {
+    icon: Globe2,
+    a: "Your team",
+    b: "Hosted tools",
+    tag: "Collaboration",
+  },
+  "Cloud Firewall & DDoS Protection": {
+    icon: Shield,
+    a: "Internet traffic",
+    b: "Your systems",
+    tag: "Protected",
+  },
+  "VPN & Private Connectivity": {
+    icon: Network,
+    a: "Office / users",
+    b: "Private connection",
+    tag: "Secure route",
+  },
+  "Managed OS & Patch Management": {
+    icon: Monitor,
+    a: "Your server",
+    b: "Updates + maintenance",
+    tag: "Kept current",
+  },
+  "Managed Database Services": {
+    icon: Database,
+    a: "Application",
+    b: "Database",
+    tag: "Managed data",
+  },
+  "Managed Network & Security Operations": {
+    icon: Shield,
+    a: "Network",
+    b: "Monitoring",
+    tag: "Watched 24×7",
+  },
+  "Backup & Recovery": {
+    icon: Database,
+    a: "Live data",
+    b: "Backup copy",
+    tag: "Restore",
+  },
+  "Disaster Recovery (DR)": {
+    icon: Zap,
+    a: "Primary systems",
+    b: "Recovery setup",
+    tag: "Business continuity",
+  },
+  "Object Storage & Ransomware Protection": {
+    icon: Database,
+    a: "Files",
+    b: "Protected storage",
+    tag: "Recoverable",
+  },
+  "Carrier Connectivity": {
+    icon: Network,
+    a: "Telecom carrier",
+    b: "Data center",
+    tag: "Connected",
+  },
+  "Cross-Connects": {
+    icon: Network,
+    a: "Network A",
+    b: "Network B",
+    tag: "Direct link",
+  },
+  "Cloud On-Ramp": {
+    icon: Cloud,
+    a: "Your infrastructure",
+    b: "Cloud provider",
+    tag: "Private path",
+  },
+  "Micro Edge Nodes": {
+    icon: Zap,
+    a: "Users",
+    b: "Nearby compute",
+    tag: "Closer",
+  },
+  "Low-Latency Compute for AI & IoT": {
+    icon: Sparkles,
+    a: "Devices",
+    b: "Nearby compute",
+    tag: "Fast response",
+  },
+  "5G & Multi-Access Edge Computing (MEC)": {
+    icon: Zap,
+    a: "5G devices",
+    b: "Edge compute",
+    tag: "Real-time",
+  },
+};
+
+function ServiceIllustration({ title }) {
+  const visual = SIMPLE_VISUALS[title] || {
+    icon: Server,
+    a: "Your business",
+    b: title,
+    tag: "Solution",
+  };
+  const Icon = visual.icon;
+  return (
+    <div
+      className="service-visual"
+      role="img"
+      aria-label={`Simple visual explanation of ${title}`}
+    >
+      <div className="visual-topline">
+        <span>Simple view</span>
+        <b>{visual.tag}</b>
+      </div>
+      <div className="visual-flow">
+        <div className="visual-node">
+          <span className="visual-icon">
+            <Monitor size={23} />
+          </span>
+          <div>
+            <small>START</small>
+            <strong>{visual.a}</strong>
+          </div>
+        </div>
+        <div className="visual-connector">
+          <span></span>
+          <ChevronRight size={21} />
+        </div>
+        <div className="visual-node visual-node-main">
+          <span className="visual-icon">
+            <Icon size={23} />
+          </span>
+          <div>
+            <small>SOLUTION</small>
+            <strong>{visual.b}</strong>
+          </div>
+        </div>
+      </div>
+      <p className="visual-explanation">
+        {SIMPLE_EXPLANATIONS[title] ||
+          "A simple way to understand this service and what it provides."}
+      </p>
+    </div>
+  );
+}
+
 function ServiceBlock({ data }) {
   return (
     <div className="service-block">
-      <h2>{data.title}</h2>
-      <p>{data.desc}</p>
-      <h3>How It Works</h3>
-      <div className="steps">
-        {data.steps.map((s, i) => (
-          <div key={i} className="step">
-            <span>STEP {i + 1}</span>
-            <p>{s}</p>
+      <ServiceIllustration title={data.title} />
+      <div className="service-content">
+        <h2>{data.title}</h2>
+        <p>{data.desc}</p>
+        <h3>How It Works</h3>
+        <div className="steps">
+          {data.steps.map((s, i) => (
+            <div key={i} className="step">
+              <span>STEP {i + 1}</span>
+              <p>{s}</p>
+            </div>
+          ))}
+        </div>
+        <div className="responsibility">
+          <div>
+            <h3>Managed by Datenfarmen</h3>
+            <ul className="bullet-list">
+              {data.managed.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
           </div>
-        ))}
-      </div>
-      <div className="responsibility">
-        <div>
-          <h3>Managed by Datenfarmen</h3>
-          <ul className="bullet-list">
-            {data.managed.map((x) => (
-              <li key={x}>{x}</li>
-            ))}
-          </ul>
+          <div>
+            <h3>Managed by You</h3>
+            <ul className="bullet-list">
+              {data.you.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div>
-          <h3>Managed by You</h3>
-          <ul className="bullet-list">
-            {data.you.map((x) => (
-              <li key={x}>{x}</li>
-            ))}
-          </ul>
+        {data.specs && (
+          <>
+            <h3>Specifications</h3>
+            <SpecTable rows={data.specs} />
+          </>
+        )}
+        <h3>Best For</h3>
+        <div className="bestfor">
+          {data.best.map((x) => (
+            <span key={x}>{x}</span>
+          ))}
         </div>
-      </div>
-      {data.specs && (
-        <>
-          <h3>Specifications</h3>
-          <SpecTable rows={data.specs} />
-        </>
-      )}
-      <h3>Best For</h3>
-      <div className="bestfor">
-        {data.best.map((x) => (
-          <span key={x}>{x}</span>
-        ))}
       </div>
     </div>
   );
