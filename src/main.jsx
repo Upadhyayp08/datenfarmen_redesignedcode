@@ -535,7 +535,7 @@ function Home({ onChat }) {
           </div>
           <div className="hero-media">
             <img
-              src="/hero-future-proof.svg"
+              src="/Futuristic_Smart_Infrastructure_Network.png"
               alt="Future-proof data infrastructure connecting cloud, industry, healthcare, logistics, education and business"
               decoding="async"
             />
