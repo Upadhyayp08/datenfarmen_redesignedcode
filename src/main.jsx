@@ -100,14 +100,14 @@ const SOLUTIONS = [
 ];
 const DATA_CENTER_IMAGES = [
   {
-    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Datacenter_Server_Racks_(22370909788).jpg",
-    alt: "Rows of server racks inside a modern data center",
-    credit: "Server racks · Wikimedia Commons · CC BY 2.0",
+    src: "/infrastructure-focus-1.webp",
+    alt: "Enterprise data center server racks and high-density infrastructure",
+    credit: "Datenfarmen infrastructure showcase",
   },
   {
-    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/CSIRO_ScienceImage_2042_A_row_of_computer_servers_in_a_server_rack.jpg",
-    alt: "Computer servers installed in data center racks",
-    credit: "Server infrastructure · CSIRO / Wikimedia Commons · CC BY 3.0",
+    src: "/infrastructure-focus-2.webp",
+    alt: "Modern data center server room with cooling and network infrastructure",
+    credit: "Datenfarmen infrastructure showcase",
   },
 ];
 
@@ -163,17 +163,22 @@ function SiteShell() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-      <ChatBubble open={chat} setOpen={setChat} />
+      {/* <ChatBubble open={chat} setOpen={setChat} /> */}
     </div>
   );
 }
 
 function Header({ mobile, setMobile }) {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const loc = useLocation();
   const solutionsRef = useRef(null);
 
-  useEffect(() => setMobile(false), [loc.pathname]);
+  useEffect(() => {
+    setMobile(false);
+    setMobileSolutionsOpen(false);
+    setSolutionsOpen(false);
+  }, [loc.pathname]);
 
   useEffect(() => {
     const handlePointerDown = (event) => {
@@ -272,7 +277,10 @@ function Header({ mobile, setMobile }) {
           ))}
         </nav>
         <div className="header-actions">
-          <Link className="button small secondary" to="/contact">
+          <Link
+            className="button small secondary consultation-breathe"
+            to="/contact"
+          >
             Get a Consultation
           </Link>
           <button
@@ -288,16 +296,45 @@ function Header({ mobile, setMobile }) {
         <div className="mobile-menu">
           <div className="container mobile-menu-inner">
             {NAV.filter(([l]) => l !== "Solutions").map(([label, path]) => (
-              <NavLink key={path} to={path} className="mobile-link">
+              <NavLink
+                key={path}
+                to={path}
+                className="mobile-link"
+                onClick={() => setMobile(false)}
+              >
                 {label}
               </NavLink>
             ))}
-            <div className="mobile-solutions-title">Solutions</div>
-            {SOLUTIONS.map((s) => (
-              <Link key={s.path} to={s.path} className="mobile-link nested">
-                {s.name}
-              </Link>
-            ))}
+            <button
+              type="button"
+              className={`mobile-solutions-toggle ${
+                mobileSolutionsOpen ? "open" : ""
+              }`}
+              onClick={() => setMobileSolutionsOpen((v) => !v)}
+              aria-expanded={mobileSolutionsOpen}
+            >
+              <span>Solutions</span>
+              <ChevronDown size={18} />
+            </button>
+            <div
+              className={`mobile-solutions-list ${
+                mobileSolutionsOpen ? "open" : ""
+              }`}
+            >
+              {SOLUTIONS.map((s) => (
+                <Link
+                  key={s.path}
+                  to={s.path}
+                  className="mobile-link nested"
+                  onClick={() => setMobile(false)}
+                >
+                  <span className="mobile-solution-icon">
+                    <SafeIcon icon={s.icon} size={16} />
+                  </span>
+                  <span>{s.name}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -443,11 +480,11 @@ function CTA({ title, body, button = "Talk to an Expert" }) {
       <div className="container">
         <div className="cta">
           <div>
-            <span className="eyebrow">Datenfarmen</span>
+            <span className="eyebrow">Datenfarmen Centers</span>
             <h2>{title}</h2>
             <p>{body}</p>
           </div>
-          <Link className="button primary" to="/contact">
+          <Link className="button primary consultation-breathe" to="/contact">
             {button}
             <ArrowRight size={17} />
           </Link>
@@ -462,7 +499,7 @@ function Home({ onChat }) {
     <>
       <section className="hero">
         <div className="container hero-grid">
-          <div>
+          <div className="hero-copy">
             <span className="eyebrow">Future-ready infrastructure</span>
             <h1>Future-Proof Data Infrastructure</h1>
             <p className="lead">
@@ -471,8 +508,11 @@ function Home({ onChat }) {
               cloud, VPS, dedicated servers and managed security.
             </p>
             <div className="hero-actions">
-              <Link className="button primary" to="/contact">
-                Get a Consultation
+              <Link
+                className="button primary consultation-breathe"
+                to="/contact"
+              >
+                Talk to an Expert
                 <ArrowRight size={17} />
               </Link>
               <Link className="button secondary" to="/solutions">
@@ -495,7 +535,7 @@ function Home({ onChat }) {
           </div>
           <div className="hero-media">
             <img
-              src="/hero-future-proof.webp"
+              src="/hero-future-proof.svg"
               alt="Future-proof data infrastructure connecting cloud, industry, healthcare, logistics, education and business"
               decoding="async"
             />
@@ -533,9 +573,8 @@ function Home({ onChat }) {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
-                  referrerPolicy="no-referrer"
                 />
                 <figcaption>{image.credit}</figcaption>
               </figure>
@@ -553,31 +592,91 @@ function Home({ onChat }) {
           infrastructure is designed to support the workloads that keep modern
           organisations moving.
         </p>
-        <div className="customer-pill-grid">
-          {[
-            "MSMEs",
-            "Web hosters",
-            "ISPs",
-            "Retail",
-            "Restaurants",
-            "Hotels",
-            "Clinics",
-            "Schools",
-            "Logistics",
-            "Ecommerce",
-            "Developers & SaaS",
-            "FinTech",
-            "EdTech",
-            "Local enterprises",
-          ].map((customer) => (
-            <span className="customer-pill" key={customer}>
-              {customer}
-            </span>
-          ))}
+        <div className="customer-marquee" aria-label="Customer segments">
+          <div className="customer-marquee-track">
+            {[
+              [
+                "MSMEs",
+                "Flexible infrastructure for growing businesses that need to scale without overbuilding.",
+                "https://www.ibef.org/assets/images/MSME-Industry-2.jpg",
+              ],
+              [
+                "Ecommerce",
+                "Reliable compute, storage and connectivity for storefronts, payments and peak traffic.",
+                "https://cdn.shopify.com/s/files/1/0841/2764/5978/files/inline2_q2_migration.png?v=1782803228",
+              ],
+              [
+                "Web Hosters & ISPs",
+                "Regional edge infrastructure for hosting platforms, connectivity and customer workloads.",
+                "https://static.wixstatic.com/media/2c4ed2_03003d2956f34c8798234896bf2febeb~mv2.png/v1/fill/w_1000,h_1000,al_c,q_90,usm_0.66_1.00_0.01/2c4ed2_03003d2956f34c8798234896bf2febeb~mv2.png",
+              ],
+              [
+                "Retail & Hospitality",
+                "Dependable infrastructure for POS, applications, customer systems and connected operations.",
+                "https://exovantatech.com/_next/image?q=75&url=%2Fimages%2Fmanage-shops-indian.png&w=3840",
+              ],
+              [
+                "Healthcare & Education",
+                "Secure, scalable infrastructure for applications, data, digital services and distributed users.",
+                "https://www.matasukhdevischool.com/Content/assets/images/class-room.jpg",
+              ],
+              [
+                "Logistics, SaaS & Digital",
+                "Low-latency infrastructure for software platforms, logistics systems, analytics and digital workloads.",
+                "https://bechna.app/_astro/courier_warehouse_personnel_packages.BcIG4NAT_Z2nCbE4.webp",
+              ],
+              [
+                "MSMEs",
+                "Flexible infrastructure for growing businesses that need to scale without overbuilding.",
+                "https://www.ibef.org/assets/images/MSME-Industry-2.jpg",
+              ],
+              [
+                "Ecommerce",
+                "Reliable compute, storage and connectivity for storefronts, payments and peak traffic.",
+                "https://cdn.shopify.com/s/files/1/0841/2764/5978/files/inline2_q2_migration.png?v=1782803228",
+              ],
+              [
+                "Web Hosters & ISPs",
+                "Regional edge infrastructure for hosting platforms, connectivity and customer workloads.",
+                "https://static.wixstatic.com/media/2c4ed2_03003d2956f34c8798234896bf2febeb~mv2.png/v1/fill/w_1000,h_1000,al_c,q_90,usm_0.66_1.00_0.01/2c4ed2_03003d2956f34c8798234896bf2febeb~mv2.png",
+              ],
+              [
+                "Retail & Hospitality",
+                "Dependable infrastructure for POS, applications, customer systems and connected operations.",
+                "https://static.prod.r53.tablethotels.com/media/hotels/slideshow_images_staged/large/1181729.jpg",
+              ],
+              [
+                "Healthcare & Education",
+                "Secure, scalable infrastructure for applications, data, digital services and distributed users.",
+                "https://www.kayawell.com/Data/Practice/d8f65584-77da-44dc-8d3f-fdfe005971b3.jpg",
+              ],
+              [
+                "Logistics, SaaS & Digital",
+                "Low-latency infrastructure for software platforms, logistics systems, analytics and digital workloads.",
+                "https://bechna.app/_astro/courier_warehouse_personnel_packages.BcIG4NAT_Z2nCbE.webp",
+              ],
+            ].map(([customer, message, image], index) => (
+              <article
+                className="customer-image-card"
+                key={`${customer}-${index}`}
+              >
+                <img
+                  src={image}
+                  alt={`${customer} infrastructure`}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="customer-image-card-content">
+                  <span>{customer}</span>
+                  <p>{message}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </Section>
       <Section
-        eyebrow="Why Datenfarmen"
+        eyebrow="Why Datenfarmen Centers"
         title="What Makes Us Different"
         className="difference-section"
       >
@@ -635,9 +734,9 @@ function Home({ onChat }) {
         className="products-section"
       >
         <p className="section-lead">
-          Beyond colocation, Datenfarmen runs a full cloud services platform —
-          provision compute, storage, VPS or dedicated servers, and secure them,
-          all from one trusted Indian provider.
+          Beyond colocation, Datenfarmen Centers runs a full cloud services
+          platform — provision compute, storage, VPS or dedicated servers, and
+          secure them, all from one trusted Indian provider.
         </p>
         <div className="solution-grid">
           {SOLUTIONS.map((s) => (
@@ -661,7 +760,7 @@ function Home({ onChat }) {
         </div>
       </Section>
       <Section
-        eyebrow="Why Datenfarmen"
+        eyebrow="Why Datenfarmen Centers"
         title="Built for Businesses That Can't Afford Downtime"
         muted
         className="why-section"
@@ -710,6 +809,7 @@ function Home({ onChat }) {
       <Section
         eyebrow="Built to Global Standards"
         title="Our facilities and operational processes are engineered around internationally recognised data center best practices."
+        className="standards-section"
       >
         <div className="standard-row">
           {[
@@ -730,49 +830,87 @@ function Home({ onChat }) {
           audits are completed.
         </p>
       </Section>
-      <Section eyebrow="Client Feedback" title="Trusted by Growing Businesses">
+      <Section
+        eyebrow="Client Feedback"
+        title="Trusted by Growing Businesses"
+        className="feedback-section"
+      >
         <p className="section-lead">
-          What our clients say about building on Datenfarmen infrastructure.
+          What our clients say about building on Datenfarmen Centers
+          infrastructure.
         </p>
-        <div className="quote-grid">
-          {[
-            [
-              `Migrating our colocation racks to Datenfarmen's Indore facility cut our latency to regional customers significantly, and their support team is always reachable.`,
-              `R`,
-              `Regional IT Manager`,
-              `Manufacturing Sector`,
-            ],
-            [
-              `The managed cloud hosting plan let our small team ship features instead of managing servers. Onboarding was fast and transparent.`,
-              `S`,
-              `Startup Founder`,
-              `SaaS Company`,
-            ],
-            [
-              `Being located in the GIDC industrial belt made Ankleshwar the obvious choice for our industrial IoT deployment — low latency, close to our plant.`,
-              `P`,
-              `Operations Head`,
-              `Chemical & Pharma`,
-            ],
-          ].map((q) => (
-            <div className="quote-card" key={q[1]}>
-              <div className="quote-mark">“</div>
-              <p>"{q[0]}"</p>
-              <div className="quote-meta">
-                <span>{q[1]}</span>
-                <div>
-                  <strong>{q[2]}</strong>
-                  <small>{q[3]}</small>
+        <div className="client-feedback-marquee">
+          <div className="quote-grid">
+            {[
+              [
+                `Migrating our colocation racks to Datenfarmen's Indore facility cut our latency to regional customers significantly, and their support team is always reachable.`,
+                `R`,
+                `Regional IT Manager`,
+                `Manufacturing Sector`,
+              ],
+              [
+                `The managed cloud hosting plan let our small team ship features instead of managing servers. Onboarding was fast and transparent.`,
+                `S`,
+                `Startup Founder`,
+                `SaaS Company`,
+              ],
+              [
+                `Being located in the GIDC industrial belt made Ankleshwar the obvious choice for our industrial IoT deployment — low latency, close to our plant.`,
+                `P`,
+                `Operations Head`,
+                `Chemical & Pharma`,
+              ],
+              [
+                `The infrastructure gave our regional operations a scalable foundation without forcing us into a large upfront deployment.`,
+                `A`,
+                `Technology Lead`,
+                `Regional Enterprise`,
+              ],
+              [
+                `We needed reliable infrastructure close to our customers, and the edge model made the deployment easier to plan around our growth.`,
+                `M`,
+                `Founder`,
+                `Digital Business`,
+              ],
+              [
+                `The team understood our connectivity and compute requirements and helped us shape the infrastructure around the workload.`,
+                `N`,
+                `Infrastructure Manager`,
+                `Technology Services`,
+              ],
+              [
+                `Having infrastructure positioned closer to our operating region gives us a practical path to scale applications and services.`,
+                `D`,
+                `Operations Director`,
+                `Logistics & Mobility`,
+              ],
+              [
+                `The pay-as-you-grow approach gives our team flexibility to start with what we need and expand as demand increases.`,
+                `K`,
+                `Business Head`,
+                `Growing MSME`,
+              ],
+            ].map((q, index) => (
+              <div className="quote-card" key={`${q[1]}-${index}`}>
+                <div className="quote-mark">“</div>
+                <p>"{q[0]}"</p>
+                <div className="quote-meta">
+                  <span>{q[1]}</span>
+                  <div>
+                    <strong>{q[2]}</strong>
+                    <small>{q[3]}</small>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         <p className="note">
           Representative feedback based on client engagements. Case studies
           available on request.
         </p>
       </Section>
+      <FAQSection />
       <Section eyebrow="Leadership" title="Led By Industry Experience">
         <div className="leadership">
           <img
@@ -795,18 +933,99 @@ function Home({ onChat }) {
         </div>
       </Section>
       <CTA
-        title="Unlock the Power of Datenfarmen For Your Business"
+        title="Unlock the Power of Datenfarmen Centers For Your Business"
         body="Connect with our experts today to design the right mix of colocation, cloud, VPS or dedicated infrastructure for your workload — and get a tailored quote."
       />
-      <button
+      {/* <button
         className="assistant-trigger"
         onClick={onChat}
         aria-label="Open Datenfarmen Assistant"
       >
         <CircleHelp size={18} />
         <span>Datenfarmen Assistant</span>
-      </button>
+      </button> */}
     </>
+  );
+}
+
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  // One important question from each of the seven FAQ sections in the supplied FAQ document.
+  const faqs = [
+    [
+      "What is Datenfarmen Centers?",
+      "Datenfarmen Centers is building a distributed network of edge data centers designed to bring cloud, compute, storage, connectivity and managed infrastructure closer to businesses and users. Our focus is on Tier-3, Tier-4 and underserved locations in India, enabling businesses to access reliable digital infrastructure without depending entirely on distant metropolitan data centers.",
+    ],
+    [
+      "What services does Datenfarmen Centers provide?",
+      "Depending on location and customer requirements, our services include colocation, dedicated infrastructure, virtual machines, compute, cloud storage, backup and disaster recovery, networking, connectivity, security and managed infrastructure services. We also work with technology partners to provide cloud and AI infrastructure closer to regional customers.",
+    ],
+    [
+      "How is Datenfarmen Centers different from a traditional data center?",
+      "Traditional large data centers are typically concentrated around major metropolitan locations. Datenfarmen Centers follows a distributed edge model, bringing infrastructure closer to regional businesses and end users. Our model focuses on local accessibility, flexible capacity, lower-latency architecture, pay-as-you-grow deployment and infrastructure suited to regional markets.",
+    ],
+    [
+      "How is the data center powered?",
+      "The ANK-1 infrastructure is being designed around a combination of grid power, solar energy and Battery Energy Storage Systems (BESS). The objective is to improve energy resilience while reducing dependence on a single source of power.",
+    ],
+    [
+      "Where will my data be stored?",
+      "For workloads deployed at ANK-1, customer data can be hosted locally in Ankleshwar, Gujarat, India, subject to the selected architecture, backup arrangement and contracted services. Customers requiring specific data-residency arrangements can discuss these requirements with our technical team.",
+    ],
+    [
+      "Can I connect Datenfarmen Centers infrastructure to my existing cloud?",
+      "Yes. Hybrid architectures can be developed to connect local edge infrastructure with existing public cloud, private cloud or enterprise environments. This can allow selected workloads to operate locally while other applications remain in larger cloud or metropolitan data centers.",
+    ],
+    [
+      "How do I know what infrastructure my business needs?",
+      "You do not need to know the exact server or data-center configuration before contacting us. Share your application, number of users, storage requirement, expected traffic, current infrastructure and business objectives. Our team can help determine an appropriate compute, storage, connectivity and backup configuration.",
+    ],
+  ];
+
+  return (
+    <section className="section faq-section">
+      <div className="container">
+        <div className="faq-heading">
+          <span className="faq-kicker">Datenfarmen Centers</span>
+          <h2>FREQUENTLY ASKED QUESTIONS</h2>
+          <p className="section-lead">
+            Clear answers about our infrastructure, services, operations and how
+            Datenfarmen can support your business.
+          </p>
+        </div>
+
+        <div className="faq-list">
+          {faqs.map(([question, answer], index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                className={`faq-item ${isOpen ? "open" : ""}`}
+                key={question}
+              >
+                <button
+                  type="button"
+                  className="faq-question"
+                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  aria-expanded={isOpen}
+                >
+                  <span className="faq-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="faq-question-text">{question}</span>
+                  <span className="faq-icon">
+                    <ChevronDown size={20} />
+                  </span>
+                </button>
+                <div className="faq-answer-wrap">
+                  <div className="faq-answer">{answer}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -820,7 +1039,7 @@ function About() {
     <>
       <PageHero
         eyebrow="Company"
-        title="About Datenfarmen"
+        title="About Datenfarmen Centers"
         description="Building the foundation for India's digital future."
       />
 
@@ -828,7 +1047,7 @@ function About() {
         <div
           className="tabs static-tabs"
           role="tablist"
-          aria-label="About Datenfarmen sections"
+          aria-label="About Datenfarmen Centers sections"
         >
           {tabs.map((tab) => (
             <button
@@ -852,6 +1071,28 @@ function About() {
                 enhances long-term <strong>sustainability</strong> by seamlessly
                 balancing renewable generation with reliable utility backup.
               </p>
+              <div className="mission-vision-grid">
+                <article className="mission-vision-card">
+                  {/* <span className="eyebrow">Mission</span> */}
+                  <h2>Mission</h2>
+                  <p>
+                    To deploy scalable micro-edge data centers across Tier 3,
+                    Tier 4, and rural locations while delivering affordable
+                    cloud, storage, cybersecurity, and managed IT services that
+                    enable businesses to digitally transform with reliability,
+                    speed, and efficiency.
+                  </p>
+                </article>
+                <article className="mission-vision-card">
+                  {/* <span className="eyebrow">Vision</span> */}
+                  <h2>Vision</h2>
+                  <p>
+                    To become India’s leading regional edge infrastructure
+                    provider, empowering underserved markets with accessible,
+                    sustainable, and enterprise-grade digital solutions.
+                  </p>
+                </article>
+              </div>
               <div className="feature-grid four">
                 {[
                   [
@@ -903,8 +1144,8 @@ function About() {
             <div role="tabpanel">
               <Section eyebrow="Future-Ready Infrastructure" title="">
                 <p className="section-lead">
-                  At Datenfarmen, innovation isn't just a buzzword; it's our
-                  architectural philosophy. We utilize a modular data center
+                  At Datenfarmen Centers, innovation isn't just a buzzword; it's
+                  our architectural philosophy. We utilize a modular data center
                   design where equipment failure has minimal impact due to quick
                   failover capabilities.
                 </p>
@@ -1129,7 +1370,6 @@ function Locations() {
       specs: [
         ["IT Capacity", "150–300 KW scalable infrastructure"],
         ["Rack Density", "2–2.5 KW per rack"],
-        ["Power", "230V single phase, 50Hz"],
         ["Redundancy", "N+1 for critical systems"],
         ["Cooling", "Advanced cooling and rack configuration"],
       ],
@@ -1174,7 +1414,6 @@ function Locations() {
       specs: [
         ["IT Capacity", "150–300 KW scalable infrastructure"],
         ["Rack Density", "2–2.5 KW per rack"],
-        ["Power", "230V single phase, 50Hz"],
         ["Redundancy", "2N for critical systems"],
         ["Cooling", "Advanced cooling and rack configuration"],
       ],
@@ -1311,8 +1550,8 @@ function Locations() {
                 growing businesses, regional customers and critical workloads.
               </p>
             </div>
-            <Link className="button primary" to="/contact">
-              Discuss Your Location Needs <ArrowRight size={17} />
+            <Link className="button primary consultation-breathe" to="/contact">
+              Talk to an Expert <ArrowRight size={17} />
             </Link>
           </div>
         </div>
@@ -1895,7 +2134,7 @@ function PricingVps() {
       {VPS_GROUPS.map((group) => (
         <section className="pricing-group" key={group.title}>
           <PricingSectionHeading
-            eyebrow="Datenfarmen"
+            eyebrow="Datenfarmen Centers"
             title={group.title}
             description={group.subtitle}
           />
@@ -2405,7 +2644,7 @@ function Contact() {
             <div className="contact-block">
               <span>CEO / Leadership</span>
               <a href="mailto:Vishal.patel@datenfarmen.in">
-                Vishal.patel@datenfarmen.in
+                vishal.patel@datenfarmen.in
               </a>
             </div>
 
@@ -2424,8 +2663,9 @@ function Contact() {
                 <h3>Message Sent Successfully</h3>
 
                 <p>
-                  Thank you for contacting Datenfarmen. Your message has been
-                  submitted successfully. Our team will get back to you soon.
+                  Thank you for contacting Datenfarmen Centers. Your message has
+                  been submitted successfully. Our team will get back to you
+                  soon.
                 </p>
 
                 <button
@@ -2473,7 +2713,7 @@ function Contact() {
                 <input
                   type="hidden"
                   name="_subject"
-                  value="New Contact Inquiry - Datenfarmen"
+                  value="New Contact Inquiry - Datenfarmen Centers"
                 />
 
                 {/* Error Message */}
@@ -2548,6 +2788,11 @@ function ServicePage() {
   const { pathname } = useLocation();
   const info = serviceData[pathname] || serviceData["/cloud-services"];
   const [tab, setTab] = useState(0);
+
+  useEffect(() => {
+    setTab(0);
+  }, [pathname]);
+
   return (
     <>
       <PageHero
@@ -2852,7 +3097,7 @@ function ServiceBlock({ data }) {
         </div>
         <div className="responsibility">
           <div>
-            <h3>Managed by Datenfarmen</h3>
+            <h3>Managed by Datenfarmen Centers</h3>
             <ul className="bullet-list">
               {data.managed.map((x) => (
                 <li key={x}>{x}</li>
@@ -2904,7 +3149,7 @@ const serviceData = {
     heroDesc:
       "Single-tenant, multi-tenant, and bare-metal compute — built on our Ankleshwar and Indore facilities.",
     intro:
-      "Datenfarmen's Cloud Services give you a spectrum of compute options, from fully dedicated single-tenant environments to elastic multi-tenant virtual machines and raw bare-metal servers. Every option is built on the same modular, high-density infrastructure across our ANK-1 and IND-1 facilities, so you can mix compute types under one account, one network, and one SLA framework.",
+      "Datenfarmen Centers Cloud Services give you a spectrum of compute options, from fully dedicated single-tenant environments to elastic multi-tenant virtual machines and raw bare-metal servers. Every option is built on the same modular, high-density infrastructure across our ANK-1 and IND-1 facilities, so you can mix compute types under one account, one network, and one SLA framework.",
     tabs: ["Single-Tenant Cloud", "Multi-Tenant Cloud", "Bare Metal Servers"],
     sections: [
       {
@@ -3019,7 +3264,7 @@ const serviceData = {
     heroDesc:
       "Dedicated-resource virtual private servers on Linux or Windows, provisioned in minutes from our Indore and Ankleshwar facilities.",
     intro:
-      "Datenfarmen VPS Hosting gives you a resizable slice of guaranteed CPU, RAM and NVMe storage on a private virtual server — a cost-effective middle ground between shared hosting and dedicated hardware. Choose Linux or Windows, manage it yourself or let our team run it for you, and scale up as your workload grows without migrating servers.",
+      "Datenfarmen Centers VPS Hosting gives you a resizable slice of guaranteed CPU, RAM and NVMe storage on a private virtual server — a cost-effective middle ground between shared hosting and dedicated hardware. Choose Linux or Windows, manage it yourself or let our team run it for you, and scale up as your workload grows without migrating servers.",
     tabs: ["Linux VPS", "Windows VPS", "Managed VPS"],
     sections: [
       {
@@ -3130,7 +3375,7 @@ const serviceData = {
     heroDesc:
       "Single-tenant physical hardware for workloads that demand maximum performance and full control.",
     intro:
-      "Datenfarmen Dedicated Servers give you exclusive access to physical hardware — no hypervisor, no shared tenancy, no noisy neighbours. Choose single or dual-processor configurations sized to your workload, manage it yourself with full root access, or add our Managed Dedicated service and let our team run day-to-day operations for you.",
+      "Datenfarmen Centers Dedicated Servers give you exclusive access to physical hardware — no hypervisor, no shared tenancy, no noisy neighbours. Choose single or dual-processor configurations sized to your workload, manage it yourself with full root access, or add our Managed Dedicated service and let our team run day-to-day operations for you.",
     tabs: ["Single Processor", "Dual Processor", "Managed Dedicated"],
     sections: [
       {
@@ -3244,7 +3489,7 @@ const serviceData = {
     heroDesc:
       "Enterprise-grade, secure business email — from cost-effective custom-domain mail to fully hosted Exchange and Office 365.",
     intro:
-      "Datenfarmen Email Hosting gives your team a professional, secure mailbox on your own domain. Choose cost-effective cPanel or Zimbra-based business email, or step up to fully hosted Microsoft Exchange or Office 365 with assisted migration and ongoing administration — all backed by spam and malware filtering at the gateway.",
+      "Datenfarmen Centers Email Hosting gives your team a professional, secure mailbox on your own domain. Choose cost-effective cPanel or Zimbra-based business email, or step up to fully hosted Microsoft Exchange or Office 365 with assisted migration and ongoing administration — all backed by spam and malware filtering at the gateway.",
     tabs: ["Business Email", "Exchange & Office 365"],
     sections: [
       {
@@ -3325,7 +3570,7 @@ const serviceData = {
     heroDesc:
       "Firewalls, DDoS protection, VPN, VPC and private connectivity to protect, route, and connect your cloud environment.",
     intro:
-      "Datenfarmen's networking and security building blocks let you control exactly how traffic reaches, moves through, and leaves your environment. From managed firewalls and always-on DDoS protection to VPC network isolation, VPN and IPSEC connectivity, load balancing and DNS management — all delivered from our carrier-neutral facilities.",
+      "Datenfarmen Centers networking and security building blocks let you control exactly how traffic reaches, moves through, and leaves your environment. From managed firewalls and always-on DDoS protection to VPC network isolation, VPN and IPSEC connectivity, load balancing and DNS management — all delivered from our carrier-neutral facilities.",
     tabs: ["Firewall & DDoS Protection", "VPN & Private Connectivity"],
     sections: [
       {
@@ -3841,7 +4086,7 @@ function Console() {
             <span className="brand-mark">
               <span />
             </span>
-            <b>DATENFARMEN</b>
+            <b>DATENFARMEN CENTERS</b>
             <small>Cloud Console</small>
           </Link>
           <div className="console-nav">
@@ -3872,7 +4117,7 @@ function Console() {
                 <span className="eyebrow">Cloud Console</span>
                 <h1>{section}</h1>
                 <p>
-                  Here's what's happening across your Datenfarmen
+                  Here's what's happening across your Datenfarmen Centers
                   infrastructure.
                 </p>
               </div>
