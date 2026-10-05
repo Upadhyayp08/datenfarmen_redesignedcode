@@ -253,6 +253,26 @@ export function Home({ onChat }) {
           ))}
         </div>
       </Section>
+      <section className="key-benefits">
+        <div className="container">
+          <h2>Key Benefits</h2>
+          <div className="key-benefits-metrics">
+            {[
+              ["40–60%", "More Cost Efficient", "vs Traditional DC"],
+              ["0", "Zero Upfront CAPEX", "Start Without Big Investment"],
+              ["99.99%", "Uptime Target", "Business Continuity Assured"],
+              ["24/7", "Monitoring & Support", "Always Here For You"],
+              ["Edge", "Faster Response", "Closer To Your Customers"],
+            ].map(([value, label, note]) => (
+              <div className="key-benefit" key={label}>
+                <strong>{value}</strong>
+                <b>{label}</b>
+                <span>{note}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Section
         eyebrow="Full-Stack Platform"
         title="One Platform, Every Workload"

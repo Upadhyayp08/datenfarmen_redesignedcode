@@ -48,9 +48,11 @@ export function About() {
                 balancing renewable generation with reliable utility backup.
               </p>
               <div className="mission-vision-grid">
-                <article className="mission-vision-card">
-                  {/* <span className="eyebrow">Mission</span> */}
-                  <h2>Mission</h2>
+                <article className="card icon-card">
+                  <span className="icon-chip large" aria-hidden="true">
+                    <span className="mission-vision-icon-shape mission-icon" />
+                  </span>
+                  <h3>Mission</h3>
                   <p>
                     To deploy scalable micro-edge data centers across Tier 3,
                     Tier 4, and rural locations while delivering affordable
@@ -59,15 +61,25 @@ export function About() {
                     speed, and efficiency.
                   </p>
                 </article>
-                <article className="mission-vision-card">
-                  {/* <span className="eyebrow">Vision</span> */}
-                  <h2>Vision</h2>
+                <article className="card icon-card">
+                  <span className="icon-chip large" aria-hidden="true">
+                    <span className="mission-vision-icon-shape vision-icon" />
+                  </span>
+                  <h3>Vision</h3>
                   <p>
                     To become India’s leading regional edge infrastructure
                     provider, empowering underserved markets with accessible,
                     sustainable, and enterprise-grade digital solutions.
                   </p>
                 </article>
+                <figure className="mission-vision-media">
+                  <img
+                    src="/mission_image.jpeg"
+                    alt="Datenfarmen operations team monitoring global infrastructure from the network operations center"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
               </div>
               <div className="feature-grid four">
                 {[

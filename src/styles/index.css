@@ -4450,6 +4450,148 @@ body {
   }
 }
 
+.key-benefits {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 0;
+  color: #fff;
+  background: radial-gradient(
+      circle at 80% 10%,
+      rgba(190, 150, 38, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(circle at 20% 80%, rgba(39, 77, 122, 0.22), transparent 32%),
+    #081d39;
+}
+
+.key-benefits::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, #000, transparent);
+  pointer-events: none;
+}
+
+.key-benefits .container {
+  position: relative;
+  z-index: 1;
+}
+
+.key-benefits h2 {
+  margin: 0 0 28px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.key-benefits-metrics {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.key-benefit {
+  min-width: 0;
+  padding: 6px 22px;
+  text-align: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.key-benefit:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.key-benefit strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.key-benefit b {
+  display: block;
+  margin-top: 10px;
+  color: var(--df-green);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.key-benefit span {
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1100px) {
+  .key-benefits-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 0;
+  }
+
+  .key-benefit,
+  .key-benefit:first-child {
+    padding: 0 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .key-benefit:nth-child(3n + 1) {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .key-benefits {
+    padding: 48px 0;
+  }
+
+  .key-benefits h2 {
+    margin-bottom: 22px;
+  }
+
+  .key-benefits-metrics {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .key-benefit,
+  .key-benefit:first-child,
+  .key-benefit:nth-child(3n + 1) {
+    display: block;
+    padding: 18px 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    text-align: center;
+  }
+
+  .key-benefit:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .key-benefit strong {
+    font-size: 28px;
+  }
+
+  .key-benefit b,
+  .key-benefit span {
+    margin-top: 0;
+  }
+}
+
 /* =========================================================
    Locations page refinement
    ========================================================= */
@@ -5645,30 +5787,55 @@ select {
 /* 5. Mission & Vision in About. */
 .mission-vision-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin: 30px 0 34px;
+  align-items: stretch;
 }
 
-.mission-vision-card {
-  padding: 28px;
+.mission-vision-icon-shape {
+  width: 22px;
+  height: 22px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.mission-icon {
+  -webkit-mask-image: url("/mission.png");
+  mask-image: url("/mission.png");
+}
+
+.vision-icon {
+  -webkit-mask-image: url("/vision.png");
+  mask-image: url("/vision.png");
+}
+
+.mission-vision-media {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
   border: 1px solid var(--df-border);
   border-radius: 18px;
-  background: linear-gradient(145deg, #fff, #f7fafc);
   box-shadow: 0 10px 28px rgba(0, 52, 93, 0.06);
+  min-height: 220px;
 }
 
-.mission-vision-card h2 {
-  margin: 8px 0 12px;
-  color: var(--df-blue);
-  font-size: 30px;
+.mission-vision-media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.mission-vision-card p {
-  margin: 0;
-  color: var(--df-gray);
-  font-size: 15px;
-  line-height: 1.75;
+.mission-vision-grid .card {
+  height: 100%;
 }
 
 /* 3. Client feedback moving left-to-right. */
@@ -5726,6 +5893,16 @@ select {
 
 .location-highlight-grid p {
   font-size: 12.5px;
+}
+
+@media (max-width: 980px) {
+  .mission-vision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-vision-media {
+    min-height: 240px;
+  }
 }
 
 @media (max-width: 800px) {
