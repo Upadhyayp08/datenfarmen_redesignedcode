@@ -9,9 +9,8 @@ export function Locations() {
       name: "Ankleshwar, Gujarat",
       status: "Phase 1",
       statusClass: "phase",
-      image: "/ankleshwar-plant.webp",
-      imageAlt:
-        "Ankleshwar data center facility layout from the company presentation",
+      image: "/ankleshwar.jpeg",
+      imageAlt: "Datenfarmen Centers Ankleshwar facility exterior",
       intro:
         "Ankleshwar GIDC is a central industrial and commercial hub for chemical, pharmaceutical, and manufacturing industries. Its strategic position supports regional digital demand and direct engagement with customers across South Gujarat.",
       site: [
@@ -53,9 +52,6 @@ export function Locations() {
       name: "Indore, Madhya Pradesh",
       status: "Live",
       statusClass: "live",
-      image: "/indore-facility.webp",
-      imageAlt:
-        "Indore data center facility concept from the company presentation",
       intro:
         "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
       site: [
@@ -117,30 +113,30 @@ export function Locations() {
 
           <div className="location-stack">
             {locations.map((location) => (
-              <article className="location-modern-card" key={location.code}>
-                <div className="location-modern-media">
-                  <img
-                    src={location.image}
-                    alt={location.imageAlt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="location-photo-overlay">
-                    <span>{location.phase}</span>
-                    <strong>{location.code}</strong>
+              <article
+                className={
+                  "location-modern-card" +
+                  (location.image ? "" : " location-modern-card-no-media")
+                }
+                key={location.code}
+              >
+                {location.image && (
+                  <div className="location-modern-media">
+                    <img
+                      src={location.image}
+                      alt={location.imageAlt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="location-photo-overlay">
+                      <strong>{location.code}</strong>
+                    </div>
                   </div>
-                  <div className="location-photo-caption">
-                    <span>Strategic location</span>
-                    <strong>{location.name}</strong>
-                  </div>
-                </div>
+                )}
 
                 <div className="location-modern-content">
                   <div className="location-title-row">
-                    <div>
-                      <span className="location-kicker">{location.phase}</span>
-                      <h2>{location.name}</h2>
-                    </div>
+                    <h2>{location.name}</h2>
                     <span className={`status ${location.statusClass}`}>
                       {location.status}
                     </span>
