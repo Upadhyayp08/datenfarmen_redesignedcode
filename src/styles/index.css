@@ -3751,8 +3751,8 @@ body {
 }
 
 .hero-media img {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+  border: 0;
+  box-shadow: none;
 }
 
 .media-note {
@@ -4846,7 +4846,8 @@ body {
 }
 .location-modern-card {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(380px, 44%) minmax(0, 56%);
+  align-items: stretch;
   min-height: 0;
   overflow: hidden;
   border: 1px solid rgba(0, 52, 93, 0.12);
@@ -4862,6 +4863,7 @@ body {
 }
 .location-modern-media {
   position: relative;
+  min-height: 280px;
   overflow: hidden;
   background: #092b43;
 }
@@ -4877,9 +4879,11 @@ body {
   pointer-events: none;
 }
 .location-modern-media img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
   object-position: center;
   transition: transform 0.6s ease;
@@ -5115,6 +5119,14 @@ body {
 }
 
 @media (max-width: 1050px) {
+  .location-modern-card,
+  .location-modern-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+  .location-modern-media {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
   .location-modern-content {
     padding: 30px;
   }
@@ -6087,8 +6099,9 @@ select {
   object-fit: contain;
   transform: none;
   border: 0;
-  border-radius: 22px;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 /* All inner-page heroes now use the same centered composition as Pricing. */
