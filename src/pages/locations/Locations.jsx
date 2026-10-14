@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Monitor, Network } from "lucide-react";
+import { ArrowRight, MapPin, Monitor, Network } from "lucide-react";
 import { PageHero } from "../../components/PageHero.jsx";
 export function Locations() {
   const locations = [
     {
       code: "ANK-1",
       name: "Ankleshwar, Gujarat",
+      mapsUrl: "https://www.google.com/maps?q=21.636528,73.030694",
       image: "/ankleshwar.png",
       imageAlt: "Datenfarmen Centers Ankleshwar facility exterior",
       intro:
@@ -130,7 +131,20 @@ export function Locations() {
 
                 <div className="location-modern-content">
                   <div className="location-title-row">
-                    <h2>{location.name}</h2>
+                    <div>
+                      <h2>{location.name}</h2>
+                      {location.mapsUrl ? (
+                        <a
+                          className="location-maps-link"
+                          href={location.mapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <MapPin size={15} />
+                          Open in Google Maps
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
 
                   <p className="location-modern-intro">{location.intro}</p>
