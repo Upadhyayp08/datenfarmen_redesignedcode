@@ -56,7 +56,7 @@ export function Locations() {
         "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
       site: [
         "Single-storey building with administrative area",
-        "Building area: 3,196 sqft",
+        "Building area: 7,196 sqft",
         "On-site parking for 3 vehicles",
         "Secure fencing options",
         "Total technical area: 600–800 sqft per data hall",
