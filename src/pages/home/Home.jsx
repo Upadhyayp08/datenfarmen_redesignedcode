@@ -109,7 +109,7 @@ export function Home({ onChat }) {
       </section>
       <Section
         eyebrow="Built for These Customers"
-        title="Infrastructure Designed Around the Way You Operate"
+        title="Infrastructure Designed Around The Way You Operate"
         className="customers-section"
       >
         <p className="section-lead">
@@ -226,7 +226,7 @@ export function Home({ onChat }) {
               Zap,
             ],
             [
-              "Hybrid Renewable + Grid Power",
+              "Hybrid Power Technology ( Renewable + Grid Power)",
               "Combining renewable generation with dependable grid power creates a balanced, resilient and more sustainable energy model.",
               Sparkles,
             ],
@@ -242,7 +242,7 @@ export function Home({ onChat }) {
             ],
           ].map(([title, text, Icon]) => (
             <div className="difference-card" key={title}>
-              <span className="difference-icon">
+              <span className="icon-chip large difference-icon">
                 <SafeIcon icon={Icon} size={23} />
               </span>
               <div>
@@ -307,7 +307,6 @@ export function Home({ onChat }) {
       <Section
         eyebrow="Why Datenfarmen Centers"
         title="Built for Businesses That Can't Afford Downtime"
-        muted
         className="why-section"
       >
         <p className="section-lead">
@@ -370,10 +369,6 @@ export function Home({ onChat }) {
             </div>
           ))}
         </div>
-        <p className="note">
-          Formal certification logos (ISO, SOC 2, etc.) will be added here as
-          audits are completed.
-        </p>
       </Section>
       <Section
         eyebrow="Client Feedback"

@@ -4,12 +4,9 @@ import { PageHero } from "../../components/PageHero.jsx";
 export function Locations() {
   const locations = [
     {
-      phase: "Phase 1",
       code: "ANK-1",
       name: "Ankleshwar, Gujarat",
-      status: "Phase 1",
-      statusClass: "phase",
-      image: "/ankleshwar.jpeg",
+      image: "/ankleshwar.png",
       imageAlt: "Datenfarmen Centers Ankleshwar facility exterior",
       intro:
         "Ankleshwar GIDC is a central industrial and commercial hub for chemical, pharmaceutical, and manufacturing industries. Its strategic position supports regional digital demand and direct engagement with customers across South Gujarat.",
@@ -47,11 +44,8 @@ export function Locations() {
       ],
     },
     {
-      phase: "Phase 2",
       code: "IND-1",
       name: "Indore, Madhya Pradesh",
-      status: "Live",
-      statusClass: "live",
       intro:
         "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
       site: [
@@ -137,9 +131,6 @@ export function Locations() {
                 <div className="location-modern-content">
                   <div className="location-title-row">
                     <h2>{location.name}</h2>
-                    <span className={`status ${location.statusClass}`}>
-                      {location.status}
-                    </span>
                   </div>
 
                   <p className="location-modern-intro">{location.intro}</p>

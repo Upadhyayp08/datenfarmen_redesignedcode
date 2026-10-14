@@ -475,11 +475,11 @@ img {
 
   text-transform: uppercase;
 
-  letter-spacing: 0.14em;
+  letter-spacing: 0.07em;
 
   font-size: 11px;
 
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .hero h1,
@@ -608,7 +608,7 @@ img {
 }
 
 .section-muted {
-  background: #edf3ee;
+  background: var(--df-white);
 }
 
 .section h2 {
@@ -2733,7 +2733,7 @@ img {
 }
 .pricing-hero .eyebrow {
   color: #c49a2e;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.09em;
 }
 .pricing-hero h1 {
   margin: 18px 0 18px;
@@ -3481,8 +3481,8 @@ h6,
 }
 
 .eyebrow {
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 .pricing-tabs-modern button {
@@ -3655,15 +3655,19 @@ body {
 }
 
 .icon-chip {
-  color: var(--df-digital-blue);
+  color: var(--df-blue);
   background: var(--df-cloud-blue);
-  border: 1px solid rgba(30, 90, 135, 0.12);
+  border: 1px solid rgba(0, 52, 93, 0.12);
+  transition: color 200ms ease, background-color 200ms ease,
+    border-color 200ms ease;
 }
 
 .mega-item:hover .icon-chip,
 .solution-card:hover .icon-chip,
-.card:hover .icon-chip {
-  color: var(--df-blue);
+.card:hover .icon-chip,
+.difference-card:hover .difference-icon,
+.difference-card:hover .icon-chip {
+  color: var(--df-green);
   background: var(--df-soft-green);
   border-color: rgba(92, 185, 63, 0.3);
 }
@@ -3883,7 +3887,7 @@ body {
 
 .why-section,
 .section-muted {
-  background: var(--df-light-gray);
+  background: var(--df-white);
 }
 
 .solution-card,
@@ -3970,6 +3974,7 @@ body {
 }
 
 .cta h2 {
+  margin: 0 0 12px;
   color: var(--df-white) !important;
   font-family: var(--font-sans) !important;
   font-weight: 800 !important;
@@ -4209,7 +4214,7 @@ body {
 }
 
 .difference-section {
-  background: var(--df-light-gray);
+  background: var(--df-cloud-blue);
 }
 
 .difference-tagline {
@@ -4242,9 +4247,9 @@ body {
 }
 
 .difference-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: rgba(92, 185, 63, 0.48);
-  box-shadow: 0 16px 36px rgba(0, 52, 93, 0.1);
+  box-shadow: 0 18px 42px rgba(0, 52, 93, 0.11);
 }
 
 .difference-icon {
@@ -4254,9 +4259,6 @@ body {
   display: grid;
   place-items: center;
   border-radius: 14px;
-  background: var(--df-soft-green);
-  color: var(--df-green);
-  border: 1px solid rgba(92, 185, 63, 0.28);
 }
 
 .difference-card h3 {
@@ -4362,7 +4364,7 @@ body {
   box-shadow: 0 12px 28px rgba(0, 52, 93, 0.09);
 }
 .difference-section {
-  background: var(--df-light-gray);
+  background: var(--df-cloud-blue);
 }
 .difference-tagline {
   margin: -2px 0 0;
@@ -4391,9 +4393,9 @@ body {
     border-color 180ms ease;
 }
 .difference-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: rgba(92, 185, 63, 0.48);
-  box-shadow: 0 16px 36px rgba(0, 52, 93, 0.1);
+  box-shadow: 0 18px 42px rgba(0, 52, 93, 0.11);
 }
 .difference-icon {
   flex: 0 0 50px;
@@ -4402,9 +4404,6 @@ body {
   display: grid;
   place-items: center;
   border-radius: 14px;
-  background: var(--df-soft-green);
-  color: var(--df-green);
-  border: 1px solid rgba(92, 185, 63, 0.28);
 }
 .difference-card h3 {
   margin: 1px 0 7px;
@@ -4884,7 +4883,7 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   transition: transform 0.6s ease;
 }
@@ -5607,7 +5606,7 @@ select {
 
 /* FAQ: one important question from each of the seven FAQ sections. */
 .faq-section {
-  background: #f7f5f0;
+  background: var(--df-cloud-blue);
   position: relative;
   overflow: hidden;
 }
@@ -6003,7 +6002,7 @@ select {
 
 .page-hero .eyebrow {
   color: #c49a2e;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.09em;
 }
 
 .page-hero h1 {
@@ -6217,14 +6216,7 @@ select {
 .standards-section {
   position: relative;
   overflow: hidden;
-  background: radial-gradient(
-      circle at 88% 18%,
-      rgba(196, 154, 46, 0.1),
-      transparent 25%
-    ),
-    linear-gradient(180deg, #eef5fa 0%, #f8fbfd 100%);
-  border-top: 1px solid rgba(0, 52, 93, 0.06);
-  border-bottom: 1px solid rgba(0, 52, 93, 0.07);
+  background: var(--df-cloud-blue);
 }
 
 .standards-section .standard-row {
@@ -6258,6 +6250,7 @@ select {
 .button,
 .solution-card,
 .card,
+.difference-card,
 .quote-card,
 .customer-image-card,
 .location-modern-card,
