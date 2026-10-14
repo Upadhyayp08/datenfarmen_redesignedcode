@@ -8,7 +8,6 @@ export function Footer() {
     ["About Us", "/about"],
     ["Solutions", "/solutions"],
     ["Locations", "/locations"],
-    ["Pricing", "/pricing"],
     ["Contact", "/contact"],
   ];
 

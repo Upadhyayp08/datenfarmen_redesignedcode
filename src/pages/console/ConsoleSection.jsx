@@ -139,11 +139,11 @@ export function ConsoleSection({ section, servers, setModal }) {
         </div>
         <div className="notice">
           Need dedicated bandwidth, or a pure data-transfer plan for backups and
-          CDN? Compare the full range — Dedicated (ILL), Shared, and Pure Data
-          Transfer — on the Pricing page.
+          CDN? Talk to our team about Dedicated (ILL), Shared, and Pure Data
+          Transfer options.
         </div>
-        <Link className="button secondary" to="/pricing">
-          View Data & Connectivity Plans
+        <Link className="button secondary" to="/contact">
+          Talk to an Expert
         </Link>
       </div>
     );

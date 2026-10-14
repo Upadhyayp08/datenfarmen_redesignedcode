@@ -2,7 +2,7 @@ export function PageHero({ eyebrow, title, description }) {
   return (
     <section className="page-hero">
       <div className="container">
-        <span className="eyebrow">{eyebrow}</span>
+        {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
         <h1>{title}</h1>
         <p>{description}</p>
       </div>

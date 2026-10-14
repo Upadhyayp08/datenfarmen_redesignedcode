@@ -298,7 +298,7 @@ export const serviceData = {
         ],
         specs: [
           ["Isolation", "Hypervisor + network-level logical isolation (VXLAN)"],
-          ["Tiers", "Edge Micro to Edge Scale — see Pricing"],
+          ["Tiers", "Edge Micro to Edge Scale — ask our team"],
           ["Billing", "Pay for the tier you choose, resize anytime"],
           ["Access", "Self-service via Cloud Console, SSH/RDP"],
           ["Typical fit", "Web apps, dev/test, startups, elastic workloads"],

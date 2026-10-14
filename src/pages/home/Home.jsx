@@ -298,8 +298,8 @@ export function Home({ onChat }) {
           ))}
         </div>
         <div className="center-link">
-          <Link className="button secondary" to="/pricing">
-            View Full Platform & Pricing
+          <Link className="button secondary" to="/solutions">
+            View Full Platform
             <ArrowRight size={17} />
           </Link>
         </div>

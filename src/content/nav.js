@@ -3,7 +3,6 @@ export const NAV = [
   ["About", "/about"],
   ["Solutions", "/solutions"],
   ["Locations", "/locations"],
-  ["Pricing", "/pricing"],
   ["Contact", "/contact"],
   ["Console", "/console"],
 ];
