@@ -46,7 +46,6 @@ export function Contact() {
   return (
     <>
       <PageHero
-        eyebrow="Contact"
         title="Contact Us"
         description="Ready to scale your infrastructure? Get in touch with our experts."
       />

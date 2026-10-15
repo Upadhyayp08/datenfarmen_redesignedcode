@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { ArrowRight, Check, Send, Shield, Sparkles, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Layers,
+  Network,
+  Send,
+  Shield,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import { Field } from "../../components/Field.jsx";
 import { IconCard } from "../../components/IconCard.jsx";
 import { Modal } from "../../components/Modal.jsx";
@@ -129,31 +138,48 @@ export function About() {
           )}
 
           {activeTab === "Innovation" && (
-            <div role="tabpanel">
-              <Section eyebrow="Future-Ready Infrastructure" title="">
-                <p className="section-lead">
-                  At Datenfarmen Centers, innovation isn't just a buzzword; it's
-                  our architectural philosophy. We utilize a modular data center
-                  design where equipment failure has minimal impact due to quick
-                  failover capabilities.
-                </p>
-                <div className="bullet-columns">
-                  <ul>
-                    <li>
-                      Edge Colocation: Ultra-low latency infrastructure
-                      supporting AI & IoT.
-                    </li>
-                    <li>
-                      Standardized Concept: All data centers use the same proven
-                      design for reliability.
-                    </li>
-                    <li>
-                      High Density Ready: Racks designed for 2-2.5 KW density to
-                      support modern computing.
-                    </li>
-                  </ul>
+            <div role="tabpanel" className="innovation-panel">
+              <div className="innovation-hero">
+                <figure className="innovation-media">
+                  <img
+                    src="/innovation.png"
+                    alt="Modular Datenfarmen edge data hall with high-density racks, redundant power and solar visible outside"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+                <div className="innovation-copy">
+                  <span className="eyebrow">Future-Ready Infrastructure</span>
+                  <h2>Modular by design. Built for what comes next.</h2>
+                  <p>
+                    Innovation is our architectural philosophy. We use a modular
+                    data center design so equipment failure has minimal impact,
+                    with fast failover and a repeatable hall that can grow with
+                    the workload.
+                  </p>
                 </div>
-              </Section>
+              </div>
+              <div className="feature-grid">
+                {[
+                  [
+                    "Edge Colocation",
+                    "Ultra-low latency infrastructure supporting AI and IoT, closer to the businesses that need it.",
+                    Network,
+                  ],
+                  [
+                    "Standardized Concept",
+                    "Every facility follows the same proven design, so reliability and operations stay consistent as we expand.",
+                    Layers,
+                  ],
+                  [
+                    "High Density Ready",
+                    "Racks designed for 2–2.5 KW density to support modern compute without wasting power or space.",
+                    Zap,
+                  ],
+                ].map(([t, d, I]) => (
+                  <IconCard key={t} title={t} text={d} icon={I} />
+                ))}
+              </div>
             </div>
           )}
 

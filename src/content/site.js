@@ -14,6 +14,7 @@ export const DATA_CENTER_IMAGES = [
 export const commonFooter = {
   tagline:
     "Building the foundation for India's digital future with reliable, scalable, and sustainable data ecosystems.",
-  address: "Ankleshwar, Gujarat, India",
+  address:
+    "2, Kashmirpark Park, Nana Kumbhnath, Nadiad, Kheda-387001, Gujarat, India",
   email: "info@datenfarmen.com",
 };

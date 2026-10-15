@@ -38,8 +38,8 @@ export function ServicePage() {
       </Section>
       <CTA
         title={`Ready to talk through ${info.title}?`}
-        body="Get a tailored quote or see live pricing for the options above."
-        button="View Pricing"
+        body="Get a tailored quote for the options above."
+        button="Talk to an Expert"
       />
     </>
   );

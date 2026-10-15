@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Monitor, Network } from "lucide-react";
+import { ArrowRight, MapPin, Monitor, Network } from "lucide-react";
 import { PageHero } from "../../components/PageHero.jsx";
 export function Locations() {
   const locations = [
     {
-      phase: "Phase 1",
       code: "ANK-1",
       name: "Ankleshwar, Gujarat",
-      status: "Phase 1",
-      statusClass: "phase",
-      image: "/ankleshwar.jpeg",
+      mapsUrl: "https://www.google.com/maps?q=21.636528,73.030694",
+      image: "/ankleshwar.png",
       imageAlt: "Datenfarmen Centers Ankleshwar facility exterior",
       intro:
         "Ankleshwar GIDC is a central industrial and commercial hub for chemical, pharmaceutical, and manufacturing industries. Its strategic position supports regional digital demand and direct engagement with customers across South Gujarat.",
@@ -28,7 +26,7 @@ export function Locations() {
       specs: [
         ["IT Capacity", "150–300 KW scalable infrastructure"],
         ["Rack Density", "2–2.5 KW per rack"],
-        ["Redundancy", "N+1 for critical systems"],
+        ["Redundancy", "2N for critical systems"],
         ["Cooling", "Advanced cooling and rack configuration"],
       ],
       highlights: [
@@ -47,11 +45,8 @@ export function Locations() {
       ],
     },
     {
-      phase: "Phase 2",
       code: "IND-1",
       name: "Indore, Madhya Pradesh",
-      status: "Live",
-      statusClass: "live",
       intro:
         "Indore represents one of Central India’s most dynamic business ecosystems, supported by diversified activity across manufacturing, pharmaceuticals, logistics, IT, and emerging digital enterprises. IND-1 is positioned to support regional demand with reliable connectivity and scalable infrastructure.",
       site: [
@@ -136,10 +131,20 @@ export function Locations() {
 
                 <div className="location-modern-content">
                   <div className="location-title-row">
-                    <h2>{location.name}</h2>
-                    <span className={`status ${location.statusClass}`}>
-                      {location.status}
-                    </span>
+                    <div>
+                      <h2>{location.name}</h2>
+                      {location.mapsUrl ? (
+                        <a
+                          className="location-maps-link"
+                          href={location.mapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <MapPin size={15} />
+                          Open in Google Maps
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
 
                   <p className="location-modern-intro">{location.intro}</p>
