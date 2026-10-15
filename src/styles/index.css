@@ -1397,7 +1397,7 @@ img {
 }
 
 .step span {
-  font-size: 10px;
+  font-size: 14px;
 
   letter-spacing: 0.12em;
 
@@ -5634,7 +5634,7 @@ select {
   top: -250px;
   right: -180px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(196, 154, 46, 0.1), transparent 68%);
+  background: radial-gradient(circle, rgba(0, 52, 93, 0.1), transparent 68%);
   pointer-events: none;
 }
 
@@ -5648,7 +5648,7 @@ select {
 .faq-kicker {
   display: inline-block;
   margin-bottom: 14px;
-  color: #0b5b91;
+  color: var(--df-blue);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -5694,7 +5694,7 @@ select {
   position: absolute;
   inset: 0 auto 0 0;
   width: 4px;
-  background: #c49a2e;
+  background: var(--df-blue);
   opacity: 0;
   transition: opacity 220ms ease;
 }
@@ -5736,7 +5736,7 @@ select {
 }
 
 .faq-number {
-  color: #c49a2e;
+  color: var(--df-blue);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -5751,15 +5751,15 @@ select {
   height: 36px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(196, 154, 46, 0.32);
+  border: 1px solid rgba(0, 52, 93, 0.28);
   border-radius: 50%;
-  color: #c49a2e;
+  color: var(--df-blue);
   transition: transform 240ms ease, background 240ms ease, color 240ms ease;
 }
 
 .faq-item.open .faq-icon {
   transform: rotate(180deg);
-  background: #c49a2e;
+  background: var(--df-blue);
   color: #fff;
 }
 
@@ -6078,7 +6078,7 @@ select {
 }
 
 .page-hero .eyebrow {
-  color: #c49a2e;
+  color: var(--df-green);
   letter-spacing: 0.09em;
 }
 
