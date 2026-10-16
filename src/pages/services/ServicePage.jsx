@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { CTA } from "../../components/CTA.jsx";
 import { PageHero } from "../../components/PageHero.jsx";
 import { Section } from "../../components/Section.jsx";
+import { WhyChooseBand } from "../../components/WhyChooseBand.jsx";
 import { serviceData } from "../../content/services.js";
 import { ServiceBlock } from "./ServiceBlock.jsx";
 export function ServicePage() {
@@ -36,6 +37,7 @@ export function ServicePage() {
         </div>
         <ServiceBlock data={info.sections[tab]} />
       </Section>
+      <WhyChooseBand />
       <CTA
         title={`Ready to talk through ${info.title}?`}
         body="Get a tailored quote for the options above."
