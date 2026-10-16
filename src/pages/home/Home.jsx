@@ -263,6 +263,7 @@ export function Home({ onChat }) {
               ["99.99%", "Uptime Target", "Business Continuity Assured"],
               ["24/7", "Monitoring & Support", "Always Here For You"],
               ["Edge", "Faster Response", "Closer To Your Customers"],
+              ["100%", "Customer-Focused", "Your Needs, Our Priority"],
             ].map(([value, label, note]) => (
               <div className="key-benefit" key={label}>
                 <strong>{value}</strong>
