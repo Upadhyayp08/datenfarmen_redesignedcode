@@ -72,39 +72,26 @@ export function Home({ onChat }) {
         </div>
       </section>
       <section className="data-center-showcase">
-        <div className="container">
+        <div className="container showcase-layout">
           <div className="showcase-heading">
-            <div>
-              <span className="eyebrow">Infrastructure in Focus</span>
-              <h2>
-                Built around resilient, modern data center infrastructure.
-              </h2>
-            </div>
+            <span className="eyebrow">Infrastructure in Focus</span>
+            <h2>
+              Built around resilient, modern data center infrastructure.
+            </h2>
             <p>
               A visual look at the server environments and high-density
               infrastructure that inspire our enterprise-first approach.
             </p>
           </div>
-          <div className="showcase-grid">
-            {DATA_CENTER_IMAGES.map((image, index) => (
-              <figure
-                className={
-                  index === 0
-                    ? "showcase-image showcase-image-large"
-                    : "showcase-image"
-                }
-                key={image.src}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="eager"
-                  decoding="async"
-                />
-                <figcaption>{image.credit}</figcaption>
-              </figure>
-            ))}
-          </div>
+          <figure className="showcase-image">
+            <img
+              src={DATA_CENTER_IMAGES[0].src}
+              alt={DATA_CENTER_IMAGES[0].alt}
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption>{DATA_CENTER_IMAGES[0].credit}</figcaption>
+          </figure>
         </div>
       </section>
       <Section
