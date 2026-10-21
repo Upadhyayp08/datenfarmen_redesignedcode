@@ -1,0 +1,47 @@
+# Datenfarmen Center
+
+> Datenfarmen Center (legal name Datenfarmen Centers LLP) is an Indian edge data center and cloud infrastructure provider.
+
+Datenfarmen Center builds distributed edge data centers so businesses can run colocation, cloud, VPS, dedicated servers and managed infrastructure closer to users instead of depending only on distant metropolitan facilities. Canonical website: https://www.datenfarmencenter.com/
+
+## Services
+
+- Cloud Services: single-tenant, multi-tenant and bare-metal compute
+- VPS Hosting: Linux and Windows virtual servers with dedicated resources
+- Dedicated Servers: single-tenant physical hardware
+- Email Hosting: custom-domain business email, hosted Exchange and Office 365
+- Networking & Security: firewalls, DDoS protection, VPN, VPC and private connectivity
+- Managed Services: 24/7 monitoring for OS, database, network and security
+- Data Protection: backup, disaster recovery and object storage
+- Interconnection: carrier connectivity, cross-connects and cloud on-ramps
+- Edge Colocation: low-latency infrastructure for AI, IoT and regional workloads
+
+## Locations
+
+- ANK-1, Ankleshwar, Gujarat, India (21.636528, 73.030694)
+- IND-1, Indore, Madhya Pradesh, India
+
+Facilities are designed around 150–300 kW IT capacity, 2–2.5 kW rack density, 2N redundancy and carrier-neutral fibre (Airtel, Jio and other providers).
+
+## Contact
+
+- Email: info@datenfarmen.com
+- Headquarters: Ankleshwar, Gujarat, India
+- Registered address: 2, Kashmirpark Park, Nana Kumbhnath, Nadiad, Kheda-387001, Gujarat, India
+
+## Pages
+
+- https://www.datenfarmencenter.com/
+- https://www.datenfarmencenter.com/about
+- https://www.datenfarmencenter.com/solutions
+- https://www.datenfarmencenter.com/locations
+- https://www.datenfarmencenter.com/contact
+- https://www.datenfarmencenter.com/cloud-services
+- https://www.datenfarmencenter.com/vps-hosting
+- https://www.datenfarmencenter.com/dedicated-servers
+- https://www.datenfarmencenter.com/email-hosting
+- https://www.datenfarmencenter.com/network-security
+- https://www.datenfarmencenter.com/managed-services
+- https://www.datenfarmencenter.com/data-protection
+- https://www.datenfarmencenter.com/interconnection
+- https://www.datenfarmencenter.com/edge-colocation

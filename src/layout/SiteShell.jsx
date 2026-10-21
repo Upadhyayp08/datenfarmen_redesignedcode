@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AppRoutes } from "../app/routes.jsx";
+import { Seo } from "../components/Seo.jsx";
 import { Header } from "./Header.jsx";
 import { Footer } from "./Footer.jsx";
 export function SiteShell() {
@@ -7,6 +8,7 @@ export function SiteShell() {
   const [chat, setChat] = useState(false);
   return (
     <div className="app">
+      <Seo />
       <Header mobile={mobile} setMobile={setMobile} />
       <AppRoutes onChat={() => setChat(true)} />
       <Footer />

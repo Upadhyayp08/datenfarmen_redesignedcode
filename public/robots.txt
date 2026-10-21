@@ -1,0 +1,29 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /console
+
+User-agent: GPTBot
+Allow: /
+Disallow: /console
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /console
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /console
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /console
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /console
+
+User-agent: *
+Allow: /
+Disallow: /console
+
+Sitemap: https://www.datenfarmencenter.com/sitemap.xml

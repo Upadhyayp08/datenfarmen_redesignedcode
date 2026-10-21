@@ -1,14 +1,16 @@
 import { useEffect } from "react";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { SiteShell } from "../layout/SiteShell.jsx";
+
 export function App() {
   return (
-    <BrowserRouter>
+    <>
       <ScrollTop />
       <SiteShell />
-    </BrowserRouter>
+    </>
   );
 }
+
 function ScrollTop() {
   const { pathname } = useLocation();
   useEffect(() => {
