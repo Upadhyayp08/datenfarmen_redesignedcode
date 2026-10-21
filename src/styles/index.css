@@ -1003,6 +1003,10 @@ img {
   margin-bottom: 26px;
 }
 
+.tab-panel[hidden] {
+  display: none;
+}
+
 .cta-wrap {
   padding: 0 0 82px;
 }

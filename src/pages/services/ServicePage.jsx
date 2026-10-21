@@ -24,10 +24,15 @@ export function ServicePage() {
       />
       <Section>
         <p className="section-lead">{info.intro}</p>
-        <div className="tabs service-tabs">
+        <div className="tabs service-tabs" role="tablist">
           {info.tabs.map((t, i) => (
             <button
               key={t}
+              type="button"
+              role="tab"
+              id={`service-tab-${i}`}
+              aria-controls={`service-panel-${i}`}
+              aria-selected={i === tab}
               onClick={() => setTab(i)}
               className={i === tab ? "active" : ""}
             >
@@ -35,7 +40,18 @@ export function ServicePage() {
             </button>
           ))}
         </div>
-        <ServiceBlock data={info.sections[tab]} />
+        {info.sections.map((section, i) => (
+          <div
+            key={section.title}
+            className="tab-panel"
+            role="tabpanel"
+            id={`service-panel-${i}`}
+            aria-labelledby={`service-tab-${i}`}
+            hidden={i !== tab}
+          >
+            <ServiceBlock data={section} />
+          </div>
+        ))}
       </Section>
       <WhyChooseBand />
       <CTA

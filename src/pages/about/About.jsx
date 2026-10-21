@@ -39,6 +39,8 @@ export function About() {
               key={tab}
               type="button"
               role="tab"
+              id={`about-tab-${tab.toLowerCase()}`}
+              aria-controls={`about-panel-${tab.toLowerCase()}`}
               aria-selected={activeTab === tab}
               className={activeTab === tab ? "active" : ""}
               onClick={() => setActiveTab(tab)}
@@ -49,8 +51,13 @@ export function About() {
         </div>
 
         <div className="about-tab-content">
-          {activeTab === "Company" && (
-            <div role="tabpanel">
+          <div
+            className="tab-panel"
+            role="tabpanel"
+            id="about-panel-company"
+            aria-labelledby="about-tab-company"
+            hidden={activeTab !== "Company"}
+          >
               <p className="company-sustainability">
                 Combining solar energy with grid power in a hybrid system
                 enhances long-term <strong>sustainability</strong> by seamlessly
@@ -116,11 +123,15 @@ export function About() {
                   <IconCard key={t} title={t} text={d} icon={I} />
                 ))}
               </div>
-            </div>
-          )}
+          </div>
 
-          {activeTab === "Leadership" && (
-            <div role="tabpanel">
+          <div
+            className="tab-panel"
+            role="tabpanel"
+            id="about-panel-leadership"
+            aria-labelledby="about-tab-leadership"
+            hidden={activeTab !== "Leadership"}
+          >
               <div className="leadership">
                 <img
                   src="https://datenfarmen.com/vishal.png"
@@ -134,11 +145,15 @@ export function About() {
                   </p>
                 </div>
               </div>
-            </div>
-          )}
+          </div>
 
-          {activeTab === "Innovation" && (
-            <div role="tabpanel" className="innovation-panel">
+          <div
+            className="tab-panel innovation-panel"
+            role="tabpanel"
+            id="about-panel-innovation"
+            aria-labelledby="about-tab-innovation"
+            hidden={activeTab !== "Innovation"}
+          >
               <div className="innovation-hero">
                 <figure className="innovation-media">
                   <img
@@ -180,11 +195,15 @@ export function About() {
                   <IconCard key={t} title={t} text={d} icon={I} />
                 ))}
               </div>
-            </div>
-          )}
+          </div>
 
-          {activeTab === "Careers" && (
-            <div role="tabpanel">
+          <div
+            className="tab-panel"
+            role="tabpanel"
+            id="about-panel-careers"
+            aria-labelledby="about-tab-careers"
+            hidden={activeTab !== "Careers"}
+          >
               <Section muted>
                 <h2>Join Our Mission</h2>
                 <p className="section-lead">
@@ -220,8 +239,7 @@ export function About() {
                   ))}
                 </div>
               </Section>
-            </div>
-          )}
+          </div>
         </div>
       </Section>
 
