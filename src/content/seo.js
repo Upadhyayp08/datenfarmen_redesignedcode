@@ -6,7 +6,7 @@ export const SITE_ORIGIN = "https://www.datenfarmencenter.com";
 export const SITE_NAME = "Datenfarmen Center";
 export const LEGAL_NAME = "Datenfarmen Centers LLP";
 export const OG_IMAGE = `${SITE_ORIGIN}/ankleshwar.png`;
-export const LOGO_URL = `${SITE_ORIGIN}/logo-mark.png`;
+export const LOGO_URL = `${SITE_ORIGIN}/logo-square.png`;
 
 export const PUBLIC_ROUTES = [
   "/",
@@ -29,87 +29,87 @@ export const PUBLIC_ROUTES = [
 
 const PAGE_SEO = {
   "/": {
-    title: "Datenfarmen Center | Edge Data Centers in India",
+    title: "Home - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center (Datenfarmen Centers LLP) is an Indian edge data center and cloud provider with colocation, VPS and dedicated servers in Ankleshwar and Indore.",
   },
   "/about": {
-    title: "About Datenfarmen Center | Edge Infrastructure in India",
+    title: "About Us - Datenfarmen Center LLP",
     description:
       "Learn how Datenfarmen Center builds modular edge data centers for India's regional markets, with facilities in Ankleshwar, Gujarat and Indore.",
   },
   "/solutions": {
-    title: "Cloud, Colocation and VPS Solutions | Datenfarmen Center",
+    title: "Solutions - Datenfarmen Center LLP",
     description:
       "Explore Datenfarmen Center solutions: cloud services, VPS hosting, dedicated servers, edge colocation, networking, managed services and data protection.",
   },
   "/locations": {
-    title: "Colocation in Ankleshwar and Indore | Datenfarmen Center",
+    title: "Locations - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center edge data centers in Ankleshwar (ANK-1) and Indore (IND-1) with 2N redundancy, carrier-neutral fibre and 150–300 kW IT capacity.",
   },
   "/contact": {
-    title: "Contact Datenfarmen Center | Edge Data Centers in India",
+    title: "Contact Us - Datenfarmen Center LLP",
     description:
       "Contact Datenfarmen Center for colocation, cloud, VPS and dedicated infrastructure in Ankleshwar and Indore. Email info@datenfarmen.com.",
   },
   "/cloud-services": {
-    title: "Cloud Services | Datenfarmen Center",
+    title: "Cloud Services - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center cloud services: single-tenant, multi-tenant and bare-metal compute at edge data centers in Ankleshwar and Indore.",
   },
   "/vps-hosting": {
-    title: "VPS Hosting in India | Datenfarmen Center",
+    title: "VPS Hosting - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center VPS hosting on Linux or Windows with dedicated CPU, RAM and NVMe from edge facilities in Ankleshwar and Indore.",
   },
   "/dedicated-servers": {
-    title: "Dedicated Servers | Datenfarmen Center",
+    title: "Dedicated Servers - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center dedicated servers: single-tenant physical hardware in Ankleshwar and Indore for peak performance and full control.",
   },
   "/email-hosting": {
-    title: "Business Email Hosting | Datenfarmen Center",
+    title: "Email Hosting - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center email hosting for custom-domain business mail, hosted Exchange and Office 365 with gateway spam and malware filtering.",
   },
   "/network-security": {
-    title: "Networking and Security | Datenfarmen Center",
+    title: "Networking & Security - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center networking and security: firewalls, DDoS protection, VPN, VPC and private connectivity from carrier-neutral Indian facilities.",
   },
   "/managed-services": {
-    title: "Managed Infrastructure Services | Datenfarmen Center",
+    title: "Managed Services - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center managed services provide 24/7 monitoring, OS patching, database operations and network security for regional infrastructure.",
   },
   "/data-protection": {
-    title: "Backup and Disaster Recovery | Datenfarmen Center",
+    title: "Data Protection - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center data protection: backup, disaster recovery and object storage for workloads hosted in Ankleshwar and Indore.",
   },
   "/interconnection": {
-    title: "Carrier Interconnection | Datenfarmen Center",
+    title: "Interconnection - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center interconnection: carrier-neutral connectivity, cross-connects and cloud on-ramps at Ankleshwar and Indore edge data centers.",
   },
   "/edge-colocation": {
-    title: "Edge Colocation in India | Datenfarmen Center",
+    title: "Edge Colocation - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center edge colocation places compute closer to factories, retail and regional users in Gujarat and Central India for lower latency.",
   },
   "/privacy-policy": {
-    title: "Privacy Policy | Datenfarmen Center",
+    title: "Privacy Policy - Datenfarmen Center LLP",
     description:
       "How Datenfarmen Center (Datenfarmen Centers LLP) collects, uses and protects information across its website and infrastructure services.",
   },
   "/terms-conditions": {
-    title: "Terms and Conditions | Datenfarmen Center",
+    title: "Terms & Conditions - Datenfarmen Center LLP",
     description:
       "Terms governing use of Datenfarmen Center website, colocation, cloud, VPS and connectivity services from Datenfarmen Centers LLP.",
   },
   "/console": {
-    title: "Customer Console | Datenfarmen Center",
+    title: "Customer Console - Datenfarmen Center LLP",
     description:
       "Datenfarmen Center customer console for managing compute, storage and networking.",
     noindex: true,
@@ -151,7 +151,13 @@ function organizationNode() {
     legalName: LEGAL_NAME,
     alternateName: [SITE_NAME, "Datenfarmen", "Datenfarmen Centers"],
     url: `${SITE_ORIGIN}/`,
-    logo: LOGO_URL,
+    logo: {
+      "@type": "ImageObject",
+      url: LOGO_URL,
+      width: 512,
+      height: 512,
+    },
+    image: LOGO_URL,
     email: commonFooter.email,
     address: {
       "@type": "PostalAddress",
@@ -161,6 +167,30 @@ function organizationNode() {
       postalCode: "387001",
       addressCountry: "IN",
     },
+  };
+}
+
+function webSiteNode() {
+  return {
+    "@type": "WebSite",
+    "@id": `${SITE_ORIGIN}/#website`,
+    name: SITE_NAME,
+    alternateName: [LEGAL_NAME, "Datenfarmen", "Datenfarmen Centers"],
+    url: `${SITE_ORIGIN}/`,
+    inLanguage: "en-IN",
+    publisher: { "@id": `${SITE_ORIGIN}/#organization` },
+    hasPart: [
+      { "@type": "WebPage", name: "Home", url: `${SITE_ORIGIN}/` },
+      { "@type": "WebPage", name: "Contact Us", url: `${SITE_ORIGIN}/contact` },
+      {
+        "@type": "WebPage",
+        name: "Cloud Services",
+        url: `${SITE_ORIGIN}/cloud-services`,
+      },
+      { "@type": "WebPage", name: "About Us", url: `${SITE_ORIGIN}/about` },
+      { "@type": "WebPage", name: "Locations", url: `${SITE_ORIGIN}/locations` },
+      { "@type": "WebPage", name: "Solutions", url: `${SITE_ORIGIN}/solutions` },
+    ],
   };
 }
 
@@ -237,7 +267,7 @@ function locationNodes() {
 }
 
 export function jsonLdForPath(pathname) {
-  const graph = [organizationNode()];
+  const graph = [organizationNode(), webSiteNode()];
   if (pathname === "/") graph.push(faqPageNode());
   if (pathname === "/locations") graph.push(...locationNodes());
   const service = serviceNode(pathname);

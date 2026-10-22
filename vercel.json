@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/(hero-future-proof|ankleshwar-plant|indore-facility|logo-mark)\\.(webp|png|jpg)",
+      "source": "/(hero-future-proof|ankleshwar-plant|indore-facility|logo-mark|logo-square|favicon|favicon-48x48|favicon-96x96|apple-touch-icon)\\.(webp|png|jpg|ico)",
       "headers": [
         {
           "key": "Cache-Control",
