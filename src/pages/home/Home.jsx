@@ -250,7 +250,7 @@ export function Home({ onChat }) {
           <div className="key-benefits-metrics">
             {[
               ["40–60%", "More Cost Efficient", "vs Traditional DC"],
-              ["0", "Zero Upfront CAPEX", "Start Without Big Investment"],
+              ["No lock-in", "Flexible Contracts", "Host, scale, or dehost anytime"],
               ["99.99%", "Uptime Target", "Business Continuity Assured"],
               ["24/7", "Monitoring & Support", "Always Here For You"],
               ["Edge", "Faster Response", "Closer To Your Customers"],
