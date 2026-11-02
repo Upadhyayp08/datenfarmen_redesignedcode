@@ -66,8 +66,8 @@ export function Contact() {
 
             <div className="contact-block">
               <span>CEO / Leadership</span>
-              <a href="mailto:Vishal.patel@datenfarmen.in">
-                vishal.patel@datenfarmen.in
+              <a href="mailto:Vishal.patel@datenfarmen.com">
+                vishal.patel@datenfarmen.com
               </a>
             </div>
 
