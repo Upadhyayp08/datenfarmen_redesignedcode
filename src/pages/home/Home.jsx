@@ -446,7 +446,7 @@ export function Home({ onChat }) {
       <Section eyebrow="Leadership" title="Led By Industry Experience">
         <div className="leadership">
           <img
-            src="https://datenfarmen.com/vishal.png"
+            src="/datenfarmen_Ceo.jpeg"
             alt="Vishal Patel - CEO"
           />
           <div>

@@ -890,6 +890,8 @@ img {
 
   object-fit: cover;
 
+  object-position: top center;
+
   border-radius: 22px;
 
   border: 1px solid var(--line);
